@@ -1,0 +1,19 @@
+{
+  "name": "palais-de-joie-nicosef",
+  "version": "1.0.0",
+  "description": "Site officiel — Au Palais de Joie Nicosef, restaurant chinois, Paris 15e. Front + API Express + base SQLite intégrée.",
+  "type": "commonjs",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.0"
+  },
+  "license": "MIT"
+}

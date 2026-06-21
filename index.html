@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Au Palais de Joie — Nicosef · Restaurant chinois, Paris 15e</title>
+<meta name="description" content="Au Palais de Joie Nicosef, 96 rue Balard, Paris 15e. Cuisine chinoise, thaï et vietnamienne. Réservez votre table, découvrez nos 4 menus et la carte." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<script>
+  /* Applique le thème avant le rendu pour éviter le flash */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("pj-theme"); } catch (e) {}
+    if (!t) { try { t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } catch (e) { t = "light"; } }
+    document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+<style>
+  :root {
+    /* Couleurs de marque — fixes */
+    --cinnabar: #b21f29; --cinnabar-deep: #8c161e;
+    --gold: #bd9444; --gold-bright: #d8b25e; --jade: #2f6b57;
+    --ink: #19110f; --cream: #f6efe2;
+    /* Thème clair (défaut) */
+    --page: #f6efe2; --page-2: #efe5d3;
+    --text: #19110f; --muted: #3b302c;
+    --card: #ffffff; --line: #ddccb2; --input: #ffffff;
+    --shadow: rgba(25,17,15,.16);
+    --display: "Fraunces", Georgia, serif;
+    --body: "Inter", system-ui, sans-serif;
+    --mono: "Space Mono", ui-monospace, monospace;
+  }
+  [data-theme="dark"] {
+    --page: #14100e; --page-2: #1d1714;
+    --text: #f1e7d6; --muted: #b6a690;
+    --card: #221a17; --line: #382c27; --input: #2a211d;
+    --shadow: rgba(0,0,0,.55);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+  body {
+    font-family: var(--body); color: var(--text); background: var(--page);
+    line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    transition: background .3s, color .3s;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  .wrap { width: min(1180px, 92vw); margin-inline: auto; }
+
+  /* ============ NAV ============ */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--page) 88%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 14px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .seal {
+    width: 42px; height: 42px; flex: none; border-radius: 50%;
+    background: var(--cinnabar); color: var(--cream); display: grid; place-items: center;
+    font-family: var(--display); font-size: 22px; font-weight: 600; box-shadow: 0 3px 0 var(--cinnabar-deep);
+  }
+  .brand b { font-family: var(--display); font-weight: 600; font-size: 1.05rem; line-height: 1.1; display: block; }
+  .brand .sub { font-family: var(--mono); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  nav.links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
+  nav.links a { font-size: .82rem; letter-spacing: .04em; color: var(--muted); transition: color .2s; }
+  nav.links a:hover { color: var(--cinnabar); }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .btn {
+    font-family: var(--body); font-size: .82rem; font-weight: 600; letter-spacing: .03em;
+    padding: 11px 20px; border-radius: 999px; cursor: pointer; border: none;
+    background: var(--cinnabar); color: var(--cream); box-shadow: 0 3px 0 var(--cinnabar-deep);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--cinnabar-deep); }
+  .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--cinnabar-deep); }
+  .btn.ghost { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1.5px var(--line); }
+  .btn.ghost:hover { box-shadow: inset 0 0 0 1.5px var(--cinnabar); color: var(--cinnabar); }
+  .btn.uber { background: #06c167; color: #0c2a16; box-shadow: 0 3px 0 #05984f; display: inline-flex; align-items: center; gap: 8px; }
+  .btn.uber:hover { box-shadow: 0 4px 0 #05984f; }
+  .btn.uber:active { box-shadow: 0 1px 0 #05984f; }
+  .btn.uber svg { width: 15px; height: 15px; }
+  .theme-toggle {
+    width: 40px; height: 40px; flex: none; border-radius: 999px; cursor: pointer;
+    background: transparent; border: 1.5px solid var(--line); color: var(--text);
+    display: grid; place-items: center; transition: border-color .2s, color .2s;
+  }
+  .theme-toggle:hover { border-color: var(--cinnabar); color: var(--cinnabar); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .sun { display: none; }
+  .theme-toggle .moon { display: block; }
+  [data-theme="dark"] .theme-toggle .sun { display: block; }
+  [data-theme="dark"] .theme-toggle .moon { display: none; }
+  .burger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 6px; }
+  .burger span { width: 24px; height: 2px; background: var(--text); display: block; }
+
+  /* ============ HERO ============ */
+  .hero { position: relative; padding: clamp(48px, 9vw, 110px) 0 clamp(40px, 6vw, 80px); overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(60% 50% at 78% 12%, rgba(216,178,94,.22), transparent 70%),
+                radial-gradient(50% 60% at 12% 90%, rgba(178,31,41,.10), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .eyebrow { font-family: var(--mono); font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--cinnabar); margin-bottom: 22px; display: flex; align-items: center; gap: 12px; }
+  .eyebrow::before { content: ""; width: 34px; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: var(--display); font-weight: 500; font-size: clamp(2.6rem, 6.4vw, 4.7rem); line-height: .98; letter-spacing: -.01em; }
+  .hero h1 em { font-style: italic; color: var(--cinnabar); }
+  .hero p.lead { margin: 26px 0 34px; font-size: 1.06rem; color: var(--muted); max-width: 38ch; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-meta { display: flex; gap: 26px; margin-top: 40px; flex-wrap: wrap; }
+  .hero-meta div { border-left: 2px solid var(--gold); padding-left: 12px; }
+  .hero-meta b { font-family: var(--display); font-size: 1.4rem; font-weight: 600; display: block; }
+  .hero-meta small { font-size: .72rem; letter-spacing: .04em; color: var(--muted); }
+
+  .lantern { position: relative; }
+  .plate {
+    aspect-ratio: 1; border-radius: 50%;
+    background: conic-gradient(from 200deg, var(--cinnabar), var(--cinnabar-deep) 40%, var(--cinnabar) 75%, var(--cinnabar-deep));
+    display: grid; place-items: center; color: var(--cream); position: relative;
+    box-shadow: 0 30px 60px -22px rgba(140,22,30,.65), inset 0 0 0 10px rgba(246,239,226,.08), inset 0 0 0 12px rgba(189,148,68,.5);
+  }
+  .plate::after { content: ""; position: absolute; inset: 26px; border-radius: 50%; border: 1px dashed rgba(216,178,94,.55); }
+  .plate .glyph { font-family: var(--display); font-size: clamp(4.5rem, 14vw, 8rem); line-height: 1; font-weight: 500; text-shadow: 0 2px 18px rgba(0,0,0,.25); text-align: center; }
+  .plate .glyph small { display: block; font-family: var(--mono); font-size: .7rem; letter-spacing: .35em; margin-top: 10px; opacity: .85; }
+  .badge-float {
+    position: absolute; bottom: 6%; left: -4%; background: var(--card); color: var(--text);
+    border-radius: 14px; padding: 12px 16px; box-shadow: 0 16px 30px -14px var(--shadow); border: 1px solid var(--line);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badge-float .stars { color: var(--gold); letter-spacing: 2px; }
+  .badge-float b { font-family: var(--display); }
+  .badge-float small { color: var(--muted); }
+
+  /* ============ STRIP (toujours sombre) ============ */
+  .strip { background: var(--ink); color: var(--cream); padding: 18px 0; overflow: hidden; }
+  .strip .wrap { display: flex; gap: 44px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .strip span { font-family: var(--mono); font-size: .74rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-bright); display: flex; align-items: center; gap: 12px; }
+  .strip span::before { content: "\25C6"; color: var(--cinnabar); font-size: .6rem; }
+
+  /* ============ SECTION SHELL ============ */
+  section.block { padding: clamp(56px, 9vw, 110px) 0; }
+  .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 48px; flex-wrap: wrap; }
+  .sec-head .label { font-family: var(--mono); font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--cinnabar); margin-bottom: 14px; }
+  .sec-head h2 { font-family: var(--display); font-weight: 500; font-size: clamp(2rem, 4.6vw, 3.2rem); line-height: 1.02; letter-spacing: -.01em; max-width: 16ch; }
+  .sec-head p { color: var(--muted); max-width: 40ch; }
+
+  /* ============ HISTOIRE ============ */
+  #histoire { background: var(--page-2); }
+  .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 5vw, 70px); align-items: center; }
+  .story-copy p { color: var(--muted); margin-bottom: 18px; font-size: 1.02rem; }
+  .story-copy p:first-of-type { font-family: var(--display); font-size: 1.5rem; line-height: 1.4; color: var(--text); font-weight: 400; }
+  .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+  .pillars div { background: var(--page-2); padding: 26px 22px; }
+  .pillars .ic { font-family: var(--display); font-size: 1.8rem; color: var(--cinnabar); margin-bottom: 8px; }
+  .pillars b { display: block; font-size: .95rem; margin-bottom: 4px; }
+  .pillars small { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ============ HEAT (piment) ============ */
+  .heat { display: inline-flex; gap: 1px; margin-left: 7px; vertical-align: middle; }
+  .heat .pep { width: 11px; height: 11px; color: var(--cinnabar); fill: currentColor; }
+
+  /* ============ MENU : sous-titres ============ */
+  .menu-sub { font-family: var(--mono); font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--cinnabar); margin: 8px 0 26px; display: flex; align-items: center; gap: 12px; }
+  .menu-sub::before, .menu-sub::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+  .menu-sub span { flex: none; }
+
+  /* ============ FORMULES ============ */
+  .formules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .formule { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px 26px 28px; position: relative; box-shadow: 0 18px 40px -32px var(--shadow); }
+  .formule.feat { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold), 0 22px 44px -30px var(--shadow); }
+  .formule-top { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding-bottom: 18px; margin-bottom: 8px; border-bottom: 2px solid var(--line); }
+  .formule-name { font-family: var(--display); font-size: 1.5rem; font-weight: 600; }
+  .formule-name .star { font-family: var(--mono); font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 2px; }
+  .formule-price { font-family: var(--display); font-size: 1.7rem; font-weight: 600; color: var(--cinnabar); white-space: nowrap; }
+  .fsection { margin-top: 16px; }
+  .fsection h4 { font-family: var(--mono); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: flex; gap: 8px; align-items: center; }
+  .fsection h4 em { font-style: normal; color: var(--gold); font-size: .58rem; }
+  .fitem { display: grid; grid-template-columns: auto 1fr auto; gap: 9px; align-items: baseline; padding: 3px 0; font-size: .9rem; }
+  .fitem .code { font-family: var(--mono); font-size: .64rem; font-weight: 700; color: var(--muted); min-width: 30px; }
+  .fitem .nm { color: var(--text); }
+  .fitem .nm small { color: var(--muted); font-size: .78rem; }
+  .fitem .supp { font-family: var(--mono); font-size: .64rem; color: var(--cinnabar); white-space: nowrap; }
+
+  /* ============ À LA CARTE ============ */
+  .menu-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 30px; }
+  .menu-tabs button {
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+    padding: 9px 16px; border-radius: 999px; cursor: pointer; border: 1px solid var(--line);
+    background: transparent; color: var(--muted); transition: all .18s;
+  }
+  .menu-tabs button:hover { border-color: var(--cinnabar); color: var(--cinnabar); }
+  .menu-tabs button.active { background: var(--cinnabar); color: var(--cream); border-color: var(--cinnabar); }
+  .menu-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
+  .dish { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: baseline; padding: 16px 0; border-bottom: 1px dotted var(--line); }
+  .dish .code { font-family: var(--mono); font-size: .74rem; font-weight: 700; color: var(--cream); background: var(--cinnabar); padding: 3px 8px; border-radius: 6px; align-self: center; min-width: 40px; text-align: center; }
+  .dish .name { font-family: var(--display); font-size: 1.12rem; font-weight: 500; }
+  .dish .name small { display: block; font-family: var(--body); font-size: .8rem; font-weight: 400; color: var(--muted); margin-top: 2px; }
+  .dish .price { font-family: var(--display); font-size: 1.1rem; font-weight: 600; white-space: nowrap; }
+  .menu-foot { margin-top: 40px; padding: 22px 26px; background: var(--page-2); border-radius: 14px; border: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .menu-foot p { font-size: .9rem; color: var(--muted); }
+
+  /* ============ RÉSERVER (toujours sombre) ============ */
+  #reserver { background: var(--ink); color: var(--cream); }
+  #reserver .sec-head h2 { color: var(--cream); }
+  #reserver .sec-head .label { color: var(--gold-bright); }
+  #reserver .sec-head p { color: rgba(246,239,226,.7); }
+  .reserve-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 5vw, 68px); align-items: start; }
+  .reserve-info { display: flex; flex-direction: column; gap: 22px; }
+  .info-row { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 22px; border-bottom: 1px solid rgba(246,239,226,.12); }
+  .info-row .k { font-family: var(--mono); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-bright); width: 96px; flex: none; padding-top: 4px; }
+  .info-row .v { font-size: .98rem; }
+  .info-row .v b { font-family: var(--display); font-weight: 500; }
+  .hours-line { display: flex; justify-content: space-between; max-width: 300px; font-size: .92rem; padding: 2px 0; }
+  .hours-line span:last-child { color: rgba(246,239,226,.72); font-variant-numeric: tabular-nums; }
+
+  form.book { background: var(--card); color: var(--text); border-radius: 20px; padding: clamp(24px, 4vw, 38px); box-shadow: 0 30px 60px -28px rgba(0,0,0,.6); }
+  form.book h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; margin-bottom: 4px; }
+  form.book .sub { font-size: .86rem; color: var(--muted); margin-bottom: 26px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-family: var(--mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+  .field input, .field select, .field textarea {
+    width: 100%; font-family: var(--body); font-size: .95rem; color: var(--text);
+    padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--input);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--cinnabar); box-shadow: 0 0 0 3px rgba(178,31,41,.14); }
+  .field textarea { resize: vertical; min-height: 64px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  form.book .btn { width: 100%; padding: 14px; font-size: .92rem; margin-top: 6px; }
+  .form-note { font-size: .74rem; color: var(--muted); text-align: center; margin-top: 14px; }
+  .toast { margin-top: 16px; padding: 14px 16px; border-radius: 10px; font-size: .9rem; display: none; align-items: flex-start; gap: 10px; }
+  .toast.ok { display: flex; background: rgba(47,107,87,.14); color: var(--jade); border: 1px solid rgba(47,107,87,.35); }
+  .toast.err { display: flex; background: rgba(178,31,41,.12); color: var(--cinnabar); border: 1px solid rgba(178,31,41,.35); }
+  .toast b { font-family: var(--display); }
+
+  /* ============ ADRESSE ============ */
+  #adresse .find-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: stretch; }
+  .map-card { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; box-shadow: 0 20px 40px -26px var(--shadow); }
+  .map-card iframe { width: 100%; height: 100%; min-height: 320px; border: 0; }
+  .find-copy { display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+  .find-copy .big { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 500; line-height: 1.15; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips span { font-family: var(--mono); font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; background: var(--page-2); border: 1px solid var(--line); color: var(--muted); }
+  .find-copy p { color: var(--muted); }
+  .contact-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+
+  /* ============ FOOTER (toujours sombre) ============ */
+  footer { background: var(--ink); color: var(--cream); padding: 60px 0 30px; }
+  .foot-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; padding-bottom: 40px; border-bottom: 1px solid rgba(246,239,226,.12); }
+  .foot-brand b { font-family: var(--display); font-size: 1.6rem; font-weight: 500; display: block; }
+  .foot-brand p { color: rgba(246,239,226,.6); font-size: .9rem; max-width: 30ch; margin-top: 8px; }
+  .foot-col h4 { font-family: var(--mono); font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 14px; }
+  .foot-col a, .foot-col p { display: block; color: rgba(246,239,226,.72); font-size: .9rem; margin-bottom: 8px; transition: color .15s; }
+  .foot-col a:hover { color: var(--cream); }
+  .foot-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 24px; font-size: .76rem; color: rgba(246,239,226,.45); }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ============ À LA CARTE : groupes & sous-catégories ============ */
+  .menu-list { display: block; }
+  .cat-block { margin-bottom: 30px; }
+  .cat-block:last-child { margin-bottom: 0; }
+  .cat-head { font-family: var(--mono); font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--cinnabar); padding-bottom: 10px; margin-bottom: 8px; border-bottom: 2px solid var(--line); display: flex; align-items: baseline; gap: 10px; }
+  .cat-head em { font-style: normal; color: var(--muted); font-size: .58rem; letter-spacing: .06em; text-transform: none; }
+  .cat-head .colhead { margin-left: auto; color: var(--muted); letter-spacing: .04em; }
+  .cat-items { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
+  .cat-block.cols .cat-items { grid-template-columns: 1fr; max-width: 620px; }
+  .dish.nocode { grid-template-columns: 1fr auto; }
+  .dish .price2 { font-family: var(--body); font-weight: 500; font-size: .86rem; color: var(--muted); margin-left: 16px; display: inline-block; min-width: 56px; text-align: right; }
+  .veg { display: inline-flex; margin-left: 6px; vertical-align: middle; }
+  .veg svg { width: 13px; height: 13px; fill: var(--jade); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 980px) { .formules { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) {
+    .hero-grid, .story-grid, .reserve-grid, #adresse .find-grid { grid-template-columns: 1fr; }
+    .lantern { max-width: 380px; margin-inline: auto; order: -1; }
+    .menu-list { grid-template-columns: 1fr; }
+    nav.links { display: none; }
+    nav.links.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 4px; background: var(--page); border-bottom: 1px solid var(--line); padding: 16px 4vw 22px; }
+    nav.links.open a { padding: 8px 0; font-size: 1rem; }
+    .burger { display: flex; }
+    .nav-cta { display: none; }
+  }
+  @media (max-width: 560px) {
+    .row2, .row3 { grid-template-columns: 1fr; }
+    .hero-meta { gap: 18px; }
+    .menu-foot { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* --- Sélecteur de langue + RTL (i18n) --- */
+  .lang-sel { font: inherit; font-size: .76rem; font-weight: 700; letter-spacing: .02em; color: var(--text);
+    background: transparent; border: 1.5px solid rgba(128,110,80,.45); border-radius: 999px;
+    padding: 6px 8px; cursor: pointer; }
+  .lang-sel:hover { border-color: var(--gold); }
+  [dir="rtl"] { text-align: right; }
+  [dir="rtl"] .lead, [dir="rtl"] .sec-head p, [dir="rtl"] .story-copy p,
+  [dir="rtl"] .find-copy p, [dir="rtl"] .menu-foot p { text-align: right; }
+  [dir="rtl"] .pep { transform: scaleX(-1); }
+  [dir="rtl"] .hours-line { flex-direction: row-reverse; }
+  [dir="rtl"] .badge-float { direction: rtl; }
+
+</style>
+</head>
+<body>
+
+<!-- icône piment réutilisable -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="pep" viewBox="0 0 16 16"><path d="M11 2c.3 1 1 1.6 2 1.6-.2 1-1 1.6-2 1.5-.2 3-2.6 6.4-5.6 7.6C3.8 13.4 2 12.4 2 10.8c0-.7.6-1.1 1.2-.8 1.2.5 2.7.2 3.7-.8-.9 0-1.7-.5-2-1.4 1.3.4 2.7-.1 3.4-1.3.6-1 .8-2.3.6-3.4-.1-.6.7-.9 1.1-.4.4.5.6 1.1.6 1.7.7-.5 1-1.3.9-2.1z"/></symbol></svg>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="seal">&#22231;</span>
+      <span><b>Au Palais de Joie</b><span class="sub">Nicosef · Paris 15<sup>e</sup></span></span>
+    </a>
+    <nav class="links" id="navlinks">
+      <a href="#histoire" data-i18n="nav.home">La maison</a>
+      <a href="#menu" data-i18n="nav.menu">Menus &amp; carte</a>
+      <a href="#adresse" data-i18n="nav.find">Nous trouver</a>
+      <a href="#reserver" data-i18n="nav.book">Réserver</a>
+    </nav>
+    <div class="nav-actions">
+      <select id="langSel" class="lang-sel" aria-label="Language" title="Language"><option value="fr">FR</option><option value="en">EN</option><option value="zh">中文</option><option value="es">ES</option><option value="de">DE</option><option value="ar">العربية</option></select>
+      <button class="theme-toggle" id="themeBtn" aria-label="Changer de thème" title="Thème clair / sombre">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="btn nav-cta" onclick="document.getElementById('reserver').scrollIntoView()" data-i18n="nav.cta">Réserver</button>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <div class="eyebrow" data-i18n="hero.eyebrow">Cuisine chinoise · thaï · vietnamienne</div>
+      <h1 data-i18n-html="hero.h1">Une table de quartier<br>aux <em>saveurs généreuses</em>.</h1>
+      <p class="lead" data-i18n="hero.lead">Au 96 rue Balard, le Palais de Joie réunit classiques cantonais, woks thaïs parfumés et menus maison. Cadre rénové, prix justes, l'accueil de Nico &amp; Jojo.</p>
+      <div class="hero-cta">
+        <button class="btn" onclick="document.getElementById('reserver').scrollIntoView()" data-i18n="hero.btnBook">Réserver une table</button>
+        <a class="btn uber" href="https://www.ubereats.com/fr/store/au-palais-de-joie-nicosef/3ADPKbsBQQWzxP_6SNiqfg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span data-i18n="hero.btnOrder">Commander sur Uber Eats</span></a>
+        <button class="btn ghost" onclick="document.getElementById('menu').scrollIntoView()" data-i18n="hero.btnMenu">Voir les menus</button>
+      </div>
+      <div class="hero-meta">
+        <div><b data-i18n="hero.m1b">4&nbsp;menus</b><small data-i18n="hero.m1s">de 13,90 à 22,90 €</small></div>
+        <div><b>89 m</b><small data-i18n="hero.m2s">du métro Balard</small></div>
+        <div><b data-i18n="hero.m3b">Midi &amp; soir</b><small data-i18n="hero.m3s">service 7j/7*</small></div>
+      </div>
+    </div>
+    <div class="lantern reveal in">
+      <div class="plate"><div class="glyph">&#21916;<small>Palais de Joie</small></div></div>
+      <div class="badge-float">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div><b data-i18n="hero.badge">« Toujours aussi agréable »</b><br><small data-i18n="hero.badgeSub">— avis client, rue Balard</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="wrap">
+    <span data-i18n="strip.1">Fait maison</span><span data-i18n="strip.2">Terrasse</span><span data-i18n="strip.3">Climatisé</span>
+    <span data-i18n="strip.4">À emporter &amp; livraison</span><span data-i18n="strip.5">Titres-restaurant</span><span data-i18n="strip.6">Accès PMR</span>
+  </div>
+</div>
+
+<!-- HISTOIRE -->
+<section class="block" id="histoire">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="label" data-i18n="histoire.label">La maison</div><h2 data-i18n-html="histoire.h2">Un palais discret au cœur du 15<sup>e</sup>.</h2></div>
+      <p data-i18n="histoire.intro">Récemment rénové, l'établissement marie saveurs chinoises, thaïes et touches françaises dans un cadre chaleureux.</p>
+    </div>
+    <div class="story-grid">
+      <div class="story-copy reveal">
+        <p data-i18n="histoire.quote">« Après six ans d'absence, nous avons retrouvé ce restaurant toujours aussi agréable : très accueillant, et des saveurs généreuses. »</p>
+        <p data-i18n="histoire.p2">Le Palais de Joie, c'est une cuisine qui ne triche pas — un riz cantonais qui fait l'unanimité, un canard laqué préparé avec soin, des spécialités thaïes relevées juste comme il faut. On vient pour manger bien, sans cérémonie, à deux pas du parc André-Citroën.</p>
+        <p data-i18n="histoire.p3">Sur place en salle climatisée, en terrasse aux beaux jours, à emporter ou en livraison : à vous de choisir.</p>
+      </div>
+      <div class="pillars reveal">
+        <div><div class="ic">&#40718;</div><b data-i18n="pil.1b">Wok &amp; braise</b><small data-i18n="pil.1s">Sautés minute, parfums francs, cuissons maîtrisées.</small></div>
+        <div><div class="ic">&#23478;</div><b data-i18n="pil.2b">Esprit maison</b><small data-i18n="pil.2s">L'accueil de Nico &amp; Jojo, comme à la maison.</small></div>
+        <div><div class="ic">&euro;</div><b data-i18n="pil.3b">Prix justes</b><small data-i18n="pil.3s">Le bon rapport qualité-prix du quartier.</small></div>
+        <div><div class="ic">&#33311;</div><b data-i18n="pil.4b">Trois cuisines</b><small data-i18n="pil.4s">Chine, Thaïlande, Vietnam sur une même carte.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="block" id="menu">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="label" data-i18n="menu.label">Menus &amp; carte</div><h2 data-i18n="menu.h2">Quatre menus, et la carte.</h2></div>
+      <p data-i18n="menu.intro">Entrée, plat, accompagnement et dessert au choix dans chaque menu. Plats également disponibles à la carte.</p>
+    </div>
+
+    <div class="menu-sub reveal"><span data-i18n="menu.sub1">Nos 4 menus</span></div>
+    <div class="formules reveal" id="formules"></div>
+
+    <div class="menu-sub reveal" style="margin-top:54px"><span data-i18n="menu.sub2">À la carte</span></div>
+    <div class="menu-tabs reveal" id="menuTabs"></div>
+    <div class="menu-list reveal" id="menuList"></div>
+
+    <div class="menu-foot reveal">
+      <p><span data-i18n="menu.footTxt">Carte non exhaustive · les prix peuvent évoluer. Allergies &amp; régimes : prévenez-nous, on adapte.</span> <span style="white-space:nowrap"><svg class="pep" style="width:11px;height:11px;color:var(--cinnabar);fill:currentColor;vertical-align:-1px"><use href="#pep"/></svg> = <span data-i18n="menu.spicy">piquant</span></span></p>
+      <button class="btn" onclick="document.getElementById('reserver').scrollIntoView()" data-i18n="menu.footBtn">Réserver pour goûter</button>
+    </div>
+  </div>
+</section>
+
+<!-- RÉSERVER -->
+<section class="block" id="reserver">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="label" data-i18n="res.label">Réservation</div><h2 data-i18n="res.h2">Réservez votre table.</h2></div>
+      <p data-i18n="res.intro">Confirmation par téléphone. Pour les grandes tablées (8+) ou un événement, appelez-nous directement.</p>
+    </div>
+    <div class="reserve-grid">
+      <div class="reserve-info reveal">
+        <div class="info-row"><div class="k" data-i18n="res.addr">Adresse</div><div class="v"><b>96 rue Balard</b><br>75015 Paris · métro Balard</div></div>
+        <div class="info-row"><div class="k" data-i18n="res.phone">Téléphone</div><div class="v"><b><a href="tel:+33145542019">01 45 54 20 19</a></b></div></div>
+        <div class="info-row" style="flex-direction:column;gap:8px;align-items:stretch">
+          <div class="k" data-i18n="res.hours">Horaires</div>
+          <div class="v" style="width:100%">
+            <div class="hours-line"><span data-i18n="hours.wk">Lun – Ven, Dim</span><span>12:00–14:30 · 19:00–22:30</span></div>
+            <div class="hours-line"><span data-i18n="hours.sat">Samedi</span><span>19:00–22:30</span></div>
+          </div>
+        </div>
+      </div>
+      <form class="book reveal" id="bookForm" novalidate>
+        <h3 data-i18n="form.h3">Demande de réservation</h3>
+        <p class="sub" data-i18n="form.sub">Remplissez le formulaire, on vous garde une table.</p>
+        <div class="row2">
+          <div class="field"><label for="name" data-i18n="form.name">Nom</label><input type="text" id="name" name="name" autocomplete="name" placeholder="Votre nom" data-i18n-ph="form.namePh" required /></div>
+          <div class="field"><label for="phone" data-i18n="form.phone">Téléphone</label><input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="06 12 34 56 78" required /></div>
+        </div>
+        <div class="field"><label for="email" data-i18n="form.email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" placeholder="vous@exemple.fr" data-i18n-ph="form.emailPh" required /></div>
+        <div class="row3">
+          <div class="field"><label for="date" data-i18n="form.date">Date</label><input type="date" id="date" name="date" required /></div>
+          <div class="field"><label for="time" data-i18n="form.time">Heure</label><select id="time" name="time" required></select></div>
+          <div class="field"><label for="guests" data-i18n="form.guests">Couverts</label><select id="guests" name="guests" required></select></div>
+        </div>
+        <div class="field"><label for="notes" data-i18n="form.notes">Demande particulière</label><textarea id="notes" name="notes" placeholder="Allergie, terrasse, chaise haute…" data-i18n-ph="form.notesPh"></textarea></div>
+        <button type="submit" class="btn" id="bookBtn" data-i18n="form.submit">Envoyer la demande</button>
+        <p class="form-note" data-i18n="form.note">En envoyant, vous acceptez d'être recontacté pour confirmer.</p>
+        <div class="toast" id="toast"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ADRESSE -->
+<section class="block" id="adresse">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="label" data-i18n="adr.label">Nous trouver</div><h2 data-i18n="adr.h2">À deux pas du métro Balard.</h2></div>
+      <p data-i18n="adr.intro">Au pied de la ligne 8, à côté du parc André-Citroën, dans le quartier Vaugirard.</p>
+    </div>
+    <div class="find-grid">
+      <div class="map-card reveal">
+        <iframe loading="lazy" title="Plan — 96 rue Balard, Paris 15e"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=2.2733%2C48.8352%2C2.2834%2C48.8403&layer=mapnik&marker=48.8377507%2C2.2783652"></iframe>
+      </div>
+      <div class="find-copy reveal">
+        <div class="big">96 rue Balard,<br>75015 Paris</div>
+        <div class="chips"><span data-i18n="adr.chip1">Métro Balard · 89 m</span><span data-i18n="adr.chip2">Parking Indigo Citroën · 296 m</span><span data-i18n="adr.chip3">Parc André-Citroën</span></div>
+        <p data-i18n="adr.amenities">Salle climatisée, terrasse, accès PMR, wifi, animaux bienvenus. Cartes &amp; titres-restaurant acceptés.</p>
+        <div class="contact-row">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=96+rue+Balard+75015+Paris" target="_blank" rel="noopener" data-i18n="adr.route">Itinéraire</a>
+          <a class="btn ghost" href="tel:+33145542019" data-i18n="adr.call">Appeler le resto</a>
+          <a class="btn uber" href="https://www.ubereats.com/fr/store/au-palais-de-joie-nicosef/3ADPKbsBQQWzxP_6SNiqfg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Uber Eats</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand"><b>Au Palais de Joie · Nicosef</b><p data-i18n-html="foot.brandDesc">Restaurant chinois, thaï &amp; vietnamien. 96 rue Balard, Paris 15<sup>e</sup>.</p></div>
+      <div class="foot-col"><h4 data-i18n="foot.visit">Visiter</h4><a href="#histoire" data-i18n="nav.home">La maison</a><a href="#menu" data-i18n="nav.menu">Menus &amp; carte</a><a href="#reserver" data-i18n="nav.book">Réserver</a><a href="#adresse" data-i18n="nav.find">Nous trouver</a></div>
+      <div class="foot-col"><h4 data-i18n="foot.contact">Contact</h4><a href="tel:+33145542019">01 45 54 20 19</a><p>96 rue Balard, 75015 Paris</p><a href="https://instagram.com/nicosef_restaurant" target="_blank" rel="noopener">@nicosef_restaurant</a><a href="https://www.ubereats.com/fr/store/au-palais-de-joie-nicosef/3ADPKbsBQQWzxP_6SNiqfg" target="_blank" rel="noopener" data-i18n="foot.order">Commander sur Uber Eats ↗</a></div>
+      <div class="foot-col"><h4 data-i18n="foot.hours">Horaires</h4><p data-i18n="foot.hoursWk">Lun–Ven, Dim : 12h–14h30 · 19h–22h30</p><p data-i18n="foot.hoursSat">Samedi : 19h–22h30</p></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> <span data-i18n="foot.rights">Au Palais de Joie — Nicosef · Tous droits réservés</span></span>
+      <span data-i18n="foot.demo">Site démo · *horaires indicatifs, vérifiez par téléphone</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Données de secours (si backend non lancé) ---------- */
+const FALLBACK = {
+  "formules": [
+    {
+      "name": "Menu",
+      "price": "13,90 €",
+      "featured": false,
+      "sections": [
+        {
+          "title": "Entrée au choix",
+          "items": [
+            {
+              "code": "4",
+              "name": "Bouchées aux crevettes à la vapeur"
+            },
+            {
+              "code": "6",
+              "name": "Délices variés à la vapeur"
+            },
+            {
+              "code": "11",
+              "name": "Potage pékinois piquant",
+              "heat": 1
+            },
+            {
+              "code": "13",
+              "name": "Soupe de poulet aux vermicelles transparents"
+            },
+            {
+              "code": "18",
+              "name": "Petits pâtés impériaux",
+              "desc": "nèms porc/poulet"
+            },
+            {
+              "code": "21",
+              "name": "Rouleaux de printemps"
+            },
+            {
+              "code": "25",
+              "name": "Salade aux crevettes"
+            },
+            {
+              "code": "26",
+              "name": "Salade au poulet"
+            }
+          ]
+        },
+        {
+          "title": "Plat au choix",
+          "items": [
+            {
+              "code": "S16a",
+              "name": "Poulet à l'ananas"
+            },
+            {
+              "code": "27",
+              "name": "Poulet au curry",
+              "heat": 1
+            },
+            {
+              "code": "28",
+              "name": "Poulet aux noix de cajou"
+            },
+            {
+              "code": "29",
+              "name": "Poulet à la sauce piquante",
+              "heat": 2
+            },
+            {
+              "code": "34",
+              "name": "Bœuf aux oignons"
+            },
+            {
+              "code": "35",
+              "name": "Bœuf à la sauce piquante",
+              "heat": 1
+            },
+            {
+              "code": "40",
+              "name": "Filet de cabillaud, gingembre & ciboulette",
+              "supp": "+2 €"
+            },
+            {
+              "code": "43",
+              "name": "Crevettes à la sauce piquante",
+              "supp": "+2 €"
+            }
+          ]
+        },
+        {
+          "title": "Accompagnement au choix",
+          "items": [
+            {
+              "code": "46",
+              "name": "Riz nature"
+            },
+            {
+              "code": "47",
+              "name": "Riz gluant"
+            },
+            {
+              "code": "48",
+              "name": "Riz cantonnais"
+            },
+            {
+              "code": "52",
+              "name": "Nouilles sautées nature"
+            },
+            {
+              "code": "55",
+              "name": "Champignon sauté nature"
+            },
+            {
+              "code": "57",
+              "name": "Légumes chop suey"
+            }
+          ]
+        },
+        {
+          "title": "Dessert au choix",
+          "note": "+1 €",
+          "items": [
+            {
+              "code": "Ly",
+              "name": "Lychees au sirop"
+            },
+            {
+              "code": "Ng",
+              "name": "Nougats chinois"
+            },
+            {
+              "code": "Gi",
+              "name": "Gingembre"
+            },
+            {
+              "code": "Bb",
+              "name": "Beignets de banane"
+            },
+            {
+              "code": "Bp",
+              "name": "Beignets de pomme"
+            },
+            {
+              "code": "Pc",
+              "name": "Perles de coco"
+            },
+            {
+              "code": "GE",
+              "name": "Glace au choix"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Menu thaï",
+      "price": "15,90 €",
+      "featured": false,
+      "sections": [
+        {
+          "title": "Entrée au choix",
+          "items": [
+            {
+              "code": "4",
+              "name": "Bouchées aux crevettes à la vapeur"
+            },
+            {
+              "code": "6",
+              "name": "Délices variés à la vapeur"
+            },
+            {
+              "code": "11",
+              "name": "Potage pékinois piquant",
+              "heat": 1
+            },
+            {
+              "code": "13",
+              "name": "Soupe de poulet aux vermicelles transparents"
+            },
+            {
+              "code": "18",
+              "name": "Petits pâtés impériaux",
+              "desc": "nèms porc/poulet"
+            },
+            {
+              "code": "25",
+              "name": "Salade aux crevettes"
+            },
+            {
+              "code": "26",
+              "name": "Salade au poulet"
+            }
+          ]
+        },
+        {
+          "title": "Plat au choix",
+          "items": [
+            {
+              "code": "T1",
+              "name": "Poulet sauté à la thaïlandaise",
+              "heat": 1
+            },
+            {
+              "code": "T2",
+              "name": "Bœuf sauté à la thaïlandaise",
+              "heat": 2
+            },
+            {
+              "code": "T3",
+              "name": "Poisson sauté à la thaïlandaise",
+              "heat": 2
+            }
+          ]
+        },
+        {
+          "title": "Accompagnement au choix",
+          "items": [
+            {
+              "code": "46",
+              "name": "Riz nature"
+            },
+            {
+              "code": "47",
+              "name": "Riz gluant"
+            },
+            {
+              "code": "48",
+              "name": "Riz cantonnais"
+            },
+            {
+              "code": "52",
+              "name": "Nouilles sautées nature"
+            },
+            {
+              "code": "57",
+              "name": "Légumes chop suey"
+            }
+          ]
+        },
+        {
+          "title": "Dessert au choix",
+          "items": [
+            {
+              "code": "Ly",
+              "name": "Lychees au sirop"
+            },
+            {
+              "code": "Ng",
+              "name": "Nougats chinois"
+            },
+            {
+              "code": "Gi",
+              "name": "Gingembre"
+            },
+            {
+              "code": "Bb",
+              "name": "Beignets de banane"
+            },
+            {
+              "code": "Bp",
+              "name": "Beignets de pomme"
+            },
+            {
+              "code": "Pc",
+              "name": "Perles de coco"
+            },
+            {
+              "code": "Ge",
+              "name": "Glace au choix"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Menu signature",
+      "price": "17,90 €",
+      "featured": false,
+      "sections": [
+        {
+          "title": "Entrée au choix",
+          "items": [
+            {
+              "code": "4",
+              "name": "Bouchées aux crevettes à la vapeur"
+            },
+            {
+              "code": "6",
+              "name": "Délices variés à la vapeur"
+            },
+            {
+              "code": "11",
+              "name": "Potage pékinois piquant",
+              "heat": 1
+            },
+            {
+              "code": "13",
+              "name": "Soupe de poulet aux vermicelles transparents"
+            },
+            {
+              "code": "18",
+              "name": "Petits pâtés impériaux",
+              "desc": "nèms porc/poulet"
+            },
+            {
+              "code": "25",
+              "name": "Salade aux crevettes"
+            },
+            {
+              "code": "26",
+              "name": "Salade au poulet"
+            }
+          ]
+        },
+        {
+          "title": "Plat au choix",
+          "items": [
+            {
+              "code": "A",
+              "name": "Crevettes sautées au sel et au poivre",
+              "heat": 1
+            },
+            {
+              "code": "B",
+              "name": "Bœuf sauté sur plaque chauffante"
+            },
+            {
+              "code": "C",
+              "name": "Poulet caramel"
+            }
+          ]
+        },
+        {
+          "title": "Accompagnement au choix",
+          "items": [
+            {
+              "code": "46",
+              "name": "Riz nature"
+            },
+            {
+              "code": "47",
+              "name": "Riz gluant"
+            },
+            {
+              "code": "48",
+              "name": "Riz cantonnais"
+            },
+            {
+              "code": "52",
+              "name": "Nouilles sautées nature"
+            },
+            {
+              "code": "57",
+              "name": "Légumes chop suey"
+            }
+          ]
+        },
+        {
+          "title": "Dessert au choix",
+          "items": [
+            {
+              "code": "Ly",
+              "name": "Lychees au sirop"
+            },
+            {
+              "code": "Ng",
+              "name": "Nougats chinois"
+            },
+            {
+              "code": "Gi",
+              "name": "Gingembre"
+            },
+            {
+              "code": "Bb",
+              "name": "Beignets de banane"
+            },
+            {
+              "code": "Bp",
+              "name": "Beignets de pomme"
+            },
+            {
+              "code": "Pc",
+              "name": "Perles de coco"
+            },
+            {
+              "code": "Ge",
+              "name": "Glace au choix"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Spécial Maison",
+      "price": "22,90 €",
+      "featured": true,
+      "sections": [
+        {
+          "title": "Entrée au choix",
+          "items": [
+            {
+              "code": "1",
+              "name": "Raviolis aux crevettes à la vapeur",
+              "desc": "Ha-kao · 4 pièces"
+            },
+            {
+              "code": "9",
+              "name": "Potage thaïlandais, crevettes & citronnelle",
+              "heat": 1
+            },
+            {
+              "code": "18",
+              "name": "Petits pâtés impériaux",
+              "desc": "nèms · 4 pièces"
+            },
+            {
+              "code": "19",
+              "name": "Nêms aux crevettes",
+              "desc": "4 pièces"
+            },
+            {
+              "code": "21",
+              "name": "Rouleaux de printemps"
+            },
+            {
+              "code": "22",
+              "name": "Salade thaïlandaise pimentée au bœuf",
+              "heat": 1
+            }
+          ]
+        },
+        {
+          "title": "Plat au choix",
+          "items": [
+            {
+              "code": "T7",
+              "name": "Crevettes sautées à la thaïlandaise",
+              "heat": 1
+            },
+            {
+              "code": "S2",
+              "name": "Canard laqué, sauce maison"
+            },
+            {
+              "code": "S4",
+              "name": "Travers de porc au sel et au poivre",
+              "heat": 1
+            },
+            {
+              "code": "A1",
+              "name": "Poulet sauté au poivre noir sur plaque chauffante",
+              "heat": 1
+            }
+          ]
+        },
+        {
+          "title": "Accompagnement au choix",
+          "items": [
+            {
+              "code": "46",
+              "name": "Riz nature"
+            },
+            {
+              "code": "47",
+              "name": "Riz gluant"
+            },
+            {
+              "code": "48",
+              "name": "Riz cantonnais"
+            },
+            {
+              "code": "52",
+              "name": "Nouilles sautées nature"
+            },
+            {
+              "code": "57",
+              "name": "Légumes chop suey"
+            }
+          ]
+        },
+        {
+          "title": "Dessert au choix",
+          "items": [
+            {
+              "code": "Ly",
+              "name": "Lychees au sirop"
+            },
+            {
+              "code": "Ng",
+              "name": "Nougats chinois"
+            },
+            {
+              "code": "Pc",
+              "name": "Perles de coco"
+            },
+            {
+              "code": "Bb",
+              "name": "Beignets de banane"
+            },
+            {
+              "code": "Bp",
+              "name": "Beignets de pomme"
+            },
+            {
+              "code": "GM",
+              "name": "Glace Mystère"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "carte": [
+    {
+      "group": "Entrées",
+      "category": "Entrées & dim sum",
+      "items": [
+        {
+          "code": "1",
+          "name": "Raviolis aux crevettes à la vapeur (Ha-Kao)",
+          "desc": "4 pièces",
+          "price": "4,90 €"
+        },
+        {
+          "code": "2",
+          "name": "Petits croissants à la vapeur (Fan-Koa)",
+          "desc": "4 pièces",
+          "price": "4,90 €"
+        },
+        {
+          "code": "3",
+          "name": "Bouchées au porc (Xiu-Mai)",
+          "desc": "4 pièces",
+          "price": "4,90 €"
+        },
+        {
+          "code": "4",
+          "name": "Bouchées aux crevettes (Ha-Xiu-Mai)",
+          "desc": "4 pièces",
+          "price": "4,90 €"
+        },
+        {
+          "code": "5",
+          "name": "Crêpes de riz à la vietnamienne",
+          "desc": "3 pièces",
+          "price": "5,90 €"
+        },
+        {
+          "code": "6",
+          "name": "Délices variés à la vapeur",
+          "desc": "5 pièces",
+          "price": "5,90 €"
+        },
+        {
+          "code": "7",
+          "name": "Raviolis pékinois grillés (Guo-Tié)",
+          "desc": "6 grandes pièces",
+          "price": "7,90 €"
+        },
+        {
+          "code": "8",
+          "name": "Raviolis grillés au poulet",
+          "desc": "6 pièces",
+          "price": "5,90 €"
+        },
+        {
+          "code": "9",
+          "name": "Potage thaï aux crevettes & citronnelle (poulet)",
+          "price": "6,90 €",
+          "heat": 1
+        },
+        {
+          "code": "11",
+          "name": "Potage pékinois piquant",
+          "price": "5,90 €",
+          "heat": 1
+        },
+        {
+          "code": "12",
+          "name": "Soupe de raviolis aux crevettes (Wun-Tun)",
+          "price": "6,90 €"
+        },
+        {
+          "code": "13",
+          "name": "Soupe de poulet aux vermicelles transparents",
+          "price": "4,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Entrées",
+      "category": "Beignets & fritures",
+      "items": [
+        {
+          "code": "14",
+          "name": "Beignet de crevettes",
+          "desc": "6 pièces",
+          "price": "7,90 €"
+        },
+        {
+          "code": "15",
+          "name": "Frites aux lamelles de légumes variés",
+          "price": "5,90 €",
+          "veg": true
+        },
+        {
+          "code": "16",
+          "name": "Raviolis aux crevettes frits",
+          "price": "5,90 €"
+        },
+        {
+          "code": "17",
+          "name": "Plateau du bonheur varié (chaud)",
+          "desc": "nêms, croissants farcis frits, croquettes de langoustine, beignets de crevettes · 1 pers.",
+          "price": "8,50 €"
+        },
+        {
+          "code": "18",
+          "name": "Nêms au porc / poulet / végétariens",
+          "desc": "4 pièces",
+          "price": "4,90 €"
+        },
+        {
+          "code": "19",
+          "name": "Nêms aux crevettes",
+          "desc": "5 pièces",
+          "price": "6,90 €"
+        },
+        {
+          "code": "20",
+          "name": "Omelette aux crevettes ou aux légumes",
+          "price": "5,90 €"
+        },
+        {
+          "code": "21",
+          "name": "Rouleau de printemps aux crevettes",
+          "price": "4,50 €"
+        }
+      ]
+    },
+    {
+      "group": "Entrées",
+      "category": "Salades",
+      "items": [
+        {
+          "code": "22",
+          "name": "Salade thaï pimentée aux crevettes ou au bœuf",
+          "price": "9,90 €",
+          "heat": 1
+        },
+        {
+          "code": "25",
+          "name": "Salade aux crevettes",
+          "price": "5,90 €"
+        },
+        {
+          "code": "26",
+          "name": "Salade au poulet",
+          "price": "5,50 €"
+        }
+      ]
+    },
+    {
+      "group": "Plats",
+      "category": "Volailles",
+      "items": [
+        {
+          "code": "27a",
+          "name": "Poulet aux champignons noirs",
+          "price": "8,90 €"
+        },
+        {
+          "code": "27",
+          "name": "Poulet au curry",
+          "price": "9,90 €",
+          "heat": 1
+        },
+        {
+          "code": "28",
+          "name": "Poulet aux noix de cajou",
+          "price": "9,90 €"
+        },
+        {
+          "code": "29",
+          "name": "Poulet à la sauce piquante",
+          "price": "9,90 €",
+          "heat": 2
+        }
+      ]
+    },
+    {
+      "group": "Plats",
+      "category": "Porc & bœuf",
+      "items": [
+        {
+          "code": "33",
+          "name": "Porc à la sauce caramel",
+          "price": "10,90 €"
+        },
+        {
+          "code": "34",
+          "name": "Bœuf aux oignons",
+          "price": "9,90 €"
+        },
+        {
+          "code": "35",
+          "name": "Bœuf à la sauce piquante",
+          "price": "9,90 €",
+          "heat": 1
+        },
+        {
+          "code": "36",
+          "name": "Bœuf sauté au saté",
+          "price": "9,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Plats",
+      "category": "Poissons & crevettes",
+      "items": [
+        {
+          "code": "39",
+          "name": "Filet de cabillaud à la sauce piquante",
+          "price": "9,90 €",
+          "heat": 1
+        },
+        {
+          "code": "40",
+          "name": "Filet de cabillaud au gingembre et à la ciboulette",
+          "price": "10,90 €"
+        },
+        {
+          "code": "41",
+          "name": "Crevettes à la sauce aigre-douce",
+          "price": "10,90 €"
+        },
+        {
+          "code": "43",
+          "name": "Crevettes sautées à la sauce piquante",
+          "price": "10,90 €",
+          "heat": 1
+        }
+      ]
+    },
+    {
+      "group": "Spécialités",
+      "category": "Spécialités du chef",
+      "note": "accompagnement non inclus",
+      "items": [
+        {
+          "code": "S1",
+          "name": "Canard laqué spécial",
+          "desc": "crêpes à enrouler soi-même, concombres, carottes & sauce",
+          "price": "14,90 €"
+        },
+        {
+          "code": "S2",
+          "name": "Canard laqué avec sauce maison",
+          "price": "10,90 €"
+        },
+        {
+          "code": "S3",
+          "name": "Canard aux cinq parfums",
+          "price": "10,90 €"
+        },
+        {
+          "code": "S4",
+          "name": "Travers de porc au sel et au poivre",
+          "price": "10,90 €",
+          "heat": 1
+        },
+        {
+          "code": "S5",
+          "name": "Poulet au citron",
+          "price": "9,90 €"
+        },
+        {
+          "code": "S6",
+          "name": "Poulet au sel et au poivre",
+          "price": "9,90 €",
+          "heat": 1
+        },
+        {
+          "code": "S7",
+          "name": "Grosses crevettes sautées au sel et au poivre",
+          "price": "12,90 €",
+          "heat": 1
+        },
+        {
+          "code": "S8",
+          "name": "Crevettes sautées à l'ail",
+          "price": "11,90 €"
+        },
+        {
+          "code": "S9",
+          "name": "Coquilles St-Jacques sautées à l'ail",
+          "price": "17,90 €"
+        },
+        {
+          "code": "S9a",
+          "name": "Coquilles St-Jacques au gingembre et à la ciboulette",
+          "price": "16,90 €"
+        },
+        {
+          "code": "S9b",
+          "name": "Coquilles St-Jacques sautées à la sauce piquante",
+          "price": "16,90 €",
+          "heat": 2
+        },
+        {
+          "code": "S10",
+          "name": "Cuisses de grenouille sautées au sel et poivre",
+          "price": "12,90 €",
+          "heat": 1
+        },
+        {
+          "code": "S11",
+          "name": "Calamar sauté au sel et au poivre",
+          "price": "11,90 €",
+          "heat": 1
+        },
+        {
+          "code": "S12",
+          "name": "Poulet croustillant du chef",
+          "price": "10,90 €",
+          "heat": 2
+        },
+        {
+          "code": "S14",
+          "name": "Marmite de fruits de mer à la thaïlandaise",
+          "desc": "légumes & vermicelles",
+          "price": "14,90 €",
+          "heat": 2
+        },
+        {
+          "code": "S16",
+          "name": "Poulet à l'ananas frais",
+          "price": "11,90 €"
+        },
+        {
+          "code": "S17",
+          "name": "Bar à la vapeur",
+          "price": "22,90 €"
+        },
+        {
+          "code": "S18",
+          "name": "Sole grillée ou à la vapeur",
+          "price": "29,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Plaque chauffante",
+      "category": "Sur plaque chauffante",
+      "note": "accompagnement non inclus",
+      "items": [
+        {
+          "code": "A1",
+          "name": "Poulet sauté au poivre noir",
+          "price": "11,90 €",
+          "heat": 2
+        },
+        {
+          "code": "A2",
+          "name": "Bœuf sauté au poivre noir",
+          "price": "12,90 €",
+          "heat": 2
+        },
+        {
+          "code": "A3",
+          "name": "Bœuf sauté au saté",
+          "price": "12,90 €"
+        },
+        {
+          "code": "A4",
+          "name": "Canard sauté au poivre noir",
+          "price": "12,90 €",
+          "heat": 2
+        },
+        {
+          "code": "A5",
+          "name": "Grosses crevettes à la sauce piquante",
+          "price": "13,90 €",
+          "heat": 2
+        },
+        {
+          "code": "A6",
+          "name": "Crevettes sautées nature ou au saté",
+          "price": "12,90 €"
+        },
+        {
+          "code": "A7",
+          "name": "Coquilles St-Jacques sautées nature",
+          "price": "15,90 €"
+        },
+        {
+          "code": "A8",
+          "name": "Coquilles St-Jacques sautées à la thaïlandaise",
+          "price": "15,90 €",
+          "heat": 2
+        },
+        {
+          "code": "A9",
+          "name": "Coquilles St-Jacques sautées à la sauce piquante",
+          "price": "15,90 €",
+          "heat": 2
+        }
+      ]
+    },
+    {
+      "group": "Thaï",
+      "category": "Spécialités thaïlandaises",
+      "note": "accompagnement non inclus",
+      "items": [
+        {
+          "code": "T1",
+          "name": "Poulet sauté à la thaïlandaise",
+          "price": "8,90 €",
+          "heat": 2
+        },
+        {
+          "code": "T2",
+          "name": "Bœuf sauté à la thaïlandaise",
+          "price": "9,90 €",
+          "heat": 2
+        },
+        {
+          "code": "T3",
+          "name": "Poisson sauté à la thaïlandaise",
+          "price": "10,90 €",
+          "heat": 2
+        },
+        {
+          "code": "T4",
+          "name": "Calamar sauté à la thaïlandaise",
+          "price": "10,90 €",
+          "heat": 2
+        },
+        {
+          "code": "T6",
+          "name": "Cuisses de grenouille sautées à la thaïlandaise",
+          "price": "14,90 €",
+          "heat": 2
+        },
+        {
+          "code": "T7",
+          "name": "Crevettes sautées à la thaïlandaise",
+          "price": "11,90 €",
+          "heat": 2
+        },
+        {
+          "code": "T8",
+          "name": "Coquilles St-Jacques sautées à la thaïlandaise",
+          "price": "16,90 €",
+          "heat": 2
+        }
+      ]
+    },
+    {
+      "group": "Bô bun & soupes",
+      "category": "Soupes spéciales",
+      "items": [
+        {
+          "code": "F3",
+          "name": "Soupe de raviolis aux crevettes (Wun-Tun)",
+          "desc": "grande",
+          "price": "10,90 €"
+        },
+        {
+          "code": "F4",
+          "name": "Soupe de udon au canard ou aux crevettes",
+          "price": "10,90 €"
+        },
+        {
+          "code": "F5",
+          "name": "Soupe de nouilles au canard",
+          "price": "10,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Bô bun & soupes",
+      "category": "Bô bun maison",
+      "items": [
+        {
+          "code": "F6",
+          "name": "Bô bun au bœuf",
+          "price": "10,90 €"
+        },
+        {
+          "code": "F7",
+          "name": "Bô bun au poulet",
+          "price": "10,90 €"
+        },
+        {
+          "code": "F8",
+          "name": "Bô bun aux crevettes",
+          "price": "12,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Bô bun & soupes",
+      "category": "Vermicelles de patates",
+      "items": [
+        {
+          "code": "F9",
+          "name": "Vermicelles de patates sautées aux crevettes / bœuf / poulet",
+          "price": "10,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Riz & légumes",
+      "category": "Accompagnements",
+      "items": [
+        {
+          "code": "46",
+          "name": "Riz nature",
+          "price": "2,50 €"
+        },
+        {
+          "code": "47",
+          "name": "Riz gluant",
+          "price": "4,50 €"
+        },
+        {
+          "code": "48",
+          "name": "Riz cantonnais",
+          "price": "4,90 €"
+        },
+        {
+          "code": "49",
+          "name": "Riz sauté au curry avec poulet",
+          "price": "7,90 €"
+        },
+        {
+          "code": "50",
+          "name": "Riz sauté aux crevettes",
+          "price": "7,50 €"
+        },
+        {
+          "code": "51",
+          "name": "Riz sauté à la thaïlandaise",
+          "desc": "ananas, crevette, basilic",
+          "price": "7,90 €",
+          "heat": 1
+        },
+        {
+          "code": "52",
+          "name": "Nouilles sautées nature",
+          "price": "5,90 €"
+        },
+        {
+          "code": "53",
+          "name": "Nouilles sautées aux crevettes / bœuf / poulet / porc",
+          "price": "9,90 €"
+        },
+        {
+          "code": "54",
+          "name": "Brocolis sautés nature",
+          "price": "8,90 €"
+        },
+        {
+          "code": "55",
+          "name": "Champignons noirs sautés nature",
+          "price": "6,90 €"
+        },
+        {
+          "code": "56",
+          "name": "Choux chinois sautés",
+          "price": "7,90 €"
+        },
+        {
+          "code": "57",
+          "name": "Légumes chop-suey",
+          "price": "6,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Végétarien",
+      "category": "Plats végétariens",
+      "items": [
+        {
+          "code": "V1",
+          "name": "Nêms végétariens",
+          "price": "5,90 €",
+          "veg": true
+        },
+        {
+          "code": "V2",
+          "name": "Rouleaux de printemps végétariens",
+          "price": "5,90 €",
+          "veg": true
+        },
+        {
+          "code": "V3",
+          "name": "Bô bun végétarien",
+          "price": "9,90 €",
+          "veg": true
+        },
+        {
+          "code": "V4",
+          "name": "Riz sauté végétarien",
+          "price": "8,90 €",
+          "veg": true
+        }
+      ]
+    },
+    {
+      "group": "Fondue & BBQ",
+      "category": "Fondue & barbecue",
+      "note": "à partager",
+      "items": [
+        {
+          "code": "F1",
+          "name": "Fondue chinoise",
+          "desc": "crevettes, seiches, noix de St-Jacques, bœuf, légumes & vermicelles",
+          "price": "28,00 € / pers · 52,00 € pour 2"
+        },
+        {
+          "code": "F2",
+          "name": "Barbecue au bœuf",
+          "price": "25,00 € / pers · 45,00 € pour 2"
+        }
+      ]
+    },
+    {
+      "group": "Desserts",
+      "category": "Glaces & sorbets",
+      "items": [
+        {
+          "code": "",
+          "name": "Sorbet au choix — 3 boules",
+          "desc": "mangue, citron, fraise, café, chocolat, pistache, vanille",
+          "price": "5,90 €"
+        },
+        {
+          "code": "",
+          "name": "Sorbet au choix — 2 boules",
+          "price": "4,50 €"
+        },
+        {
+          "code": "",
+          "name": "Sorbet au choix — 1 boule",
+          "price": "2,50 €"
+        },
+        {
+          "code": "",
+          "name": "Orange givrée",
+          "price": "5,90 €"
+        },
+        {
+          "code": "",
+          "name": "Citron givré",
+          "price": "5,90 €"
+        },
+        {
+          "code": "",
+          "name": "Coco givrée",
+          "price": "7,90 €"
+        },
+        {
+          "code": "",
+          "name": "Mystère vanille",
+          "price": "5,50 €"
+        },
+        {
+          "code": "",
+          "name": "Nougat glacé",
+          "price": "6,90 €"
+        },
+        {
+          "code": "",
+          "name": "Parfait caramel",
+          "price": "6,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Desserts",
+      "category": "Desserts maison",
+      "items": [
+        {
+          "code": "",
+          "name": "Perle de coco",
+          "price": "4,50 €"
+        },
+        {
+          "code": "",
+          "name": "Lychees au sirop",
+          "price": "4,50 €"
+        },
+        {
+          "code": "",
+          "name": "Nougat chinois",
+          "price": "3,90 €"
+        },
+        {
+          "code": "",
+          "name": "Demi-mangue fraîche",
+          "price": "6,90 €"
+        },
+        {
+          "code": "",
+          "name": "Ananas frais",
+          "price": "5,90 €"
+        },
+        {
+          "code": "",
+          "name": "Gingembre confit",
+          "price": "4,90 €"
+        },
+        {
+          "code": "",
+          "name": "Banana split",
+          "price": "7,90 €"
+        },
+        {
+          "code": "",
+          "name": "Dôme blanche",
+          "price": "6,00 €"
+        },
+        {
+          "code": "",
+          "name": "Délice menthe",
+          "price": "7,90 €"
+        },
+        {
+          "code": "",
+          "name": "Beignet de pomme (banane, ananas)",
+          "price": "4,90 €"
+        },
+        {
+          "code": "",
+          "name": "Beignet flambé au rhum ou au Meikwei lu",
+          "price": "7,90 €"
+        },
+        {
+          "code": "",
+          "name": "Coupe colonel",
+          "price": "7,90 €"
+        },
+        {
+          "code": "",
+          "name": "Chocolat liégeois",
+          "price": "7,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Boissons",
+      "category": "Apéritifs",
+      "items": [
+        {
+          "code": "",
+          "name": "Cocktail maison (12cl)",
+          "price": "4,00 €"
+        },
+        {
+          "code": "",
+          "name": "Cocktail maison sans alcool (12cl)",
+          "price": "4,00 €"
+        },
+        {
+          "code": "",
+          "name": "Ricard (4cl)",
+          "price": "4,00 €"
+        },
+        {
+          "code": "",
+          "name": "Martini rouge ou blanc (8cl)",
+          "price": "4,00 €"
+        },
+        {
+          "code": "",
+          "name": "Martini gin (8cl)",
+          "price": "4,50 €"
+        },
+        {
+          "code": "",
+          "name": "Porto (8cl)",
+          "price": "4,50 €"
+        },
+        {
+          "code": "",
+          "name": "Americano (8cl)",
+          "price": "4,00 €"
+        },
+        {
+          "code": "",
+          "name": "Whisky (8cl)",
+          "price": "7,00 €"
+        },
+        {
+          "code": "",
+          "name": "Gin tonic (12cl)",
+          "price": "6,90 €"
+        },
+        {
+          "code": "",
+          "name": "Kir (12cl)",
+          "price": "4,00 €"
+        },
+        {
+          "code": "",
+          "name": "Kir royal (12cl)",
+          "price": "7,00 €"
+        },
+        {
+          "code": "",
+          "name": "Champagne (12cl)",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "group": "Boissons",
+      "category": "Bières & boissons",
+      "items": [
+        {
+          "code": "",
+          "name": "Bière 33cl — Tsingtao, Heineken, Carlsberg, Singha",
+          "price": "4,00 €"
+        },
+        {
+          "code": "",
+          "name": "Evian / San-Pellegrino (0,5 L)",
+          "price": "3,50 €"
+        },
+        {
+          "code": "",
+          "name": "Evian / San-Pellegrino (1 L)",
+          "price": "5,50 €"
+        },
+        {
+          "code": "",
+          "name": "Perrier (33cl)",
+          "price": "3,50 €"
+        },
+        {
+          "code": "",
+          "name": "Lipton (33cl)",
+          "price": "2,90 €"
+        },
+        {
+          "code": "",
+          "name": "Schweppes / Limonade (25cl)",
+          "price": "3,50 €"
+        },
+        {
+          "code": "",
+          "name": "Orangina (25cl)",
+          "price": "3,50 €"
+        },
+        {
+          "code": "",
+          "name": "Coca-Cola, light, Zéro (33cl)",
+          "price": "3,50 €"
+        },
+        {
+          "code": "",
+          "name": "Jus de coco (25cl)",
+          "price": "3,50 €"
+        },
+        {
+          "code": "",
+          "name": "Jus de fruits (orange, ananas, abricot)",
+          "price": "3,50 €"
+        },
+        {
+          "code": "",
+          "name": "Lait de soja",
+          "price": "3,50 €"
+        },
+        {
+          "code": "",
+          "name": "Thé vert, oolong, jasmin, menthe",
+          "price": "3,00 €"
+        },
+        {
+          "code": "",
+          "name": "Café ou décaféiné",
+          "price": "2,00 €"
+        },
+        {
+          "code": "",
+          "name": "Café crème",
+          "price": "3,50 €"
+        }
+      ]
+    },
+    {
+      "group": "Boissons",
+      "category": "Vins en pichet — Roucas (rosé, rouge, blanc)",
+      "items": [
+        {
+          "code": "",
+          "name": "1/4 (20cl)",
+          "price": "3,20 €"
+        },
+        {
+          "code": "",
+          "name": "1/2 (37,5cl)",
+          "price": "5,90 €"
+        },
+        {
+          "code": "",
+          "name": "Un verre",
+          "price": "2,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Boissons",
+      "category": "Vins rosés",
+      "cols": true,
+      "items": [
+        {
+          "code": "",
+          "name": "Rosé de Provence",
+          "price": "13,90 €",
+          "price2": "8,90 €"
+        },
+        {
+          "code": "",
+          "name": "Rosé Saint-Tropez",
+          "price": "18,90 €",
+          "price2": "10,90 €"
+        },
+        {
+          "code": "",
+          "name": "Rosé Sancerre",
+          "price": "28,90 €",
+          "price2": "15,90 €"
+        },
+        {
+          "code": "",
+          "name": "Rosé d'Anjou",
+          "price": "14,90 €",
+          "price2": "8,90 €"
+        },
+        {
+          "code": "",
+          "name": "Rosé Tavel",
+          "price": "19,90 €",
+          "price2": "11,90 €"
+        },
+        {
+          "code": "",
+          "name": "Rosé Chinon",
+          "price": "16,90 €",
+          "price2": "9,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Boissons",
+      "category": "Vins rouges",
+      "cols": true,
+      "items": [
+        {
+          "code": "",
+          "name": "Côtes du Rhône",
+          "price": "13,90 €",
+          "price2": "8,90 €"
+        },
+        {
+          "code": "",
+          "name": "Beaujolais Villages",
+          "price": "15,90 €",
+          "price2": "9,90 €"
+        },
+        {
+          "code": "",
+          "name": "Bordeaux Supérieur",
+          "price": "16,90 €",
+          "price2": "9,90 €"
+        },
+        {
+          "code": "",
+          "name": "Bordeaux Mouton Cadet",
+          "price": "26,90 €",
+          "price2": "14,90 €"
+        },
+        {
+          "code": "",
+          "name": "Brouilly",
+          "price": "22,90 €",
+          "price2": "12,90 €"
+        },
+        {
+          "code": "",
+          "name": "Saint-Émilion",
+          "price": "25,90 €",
+          "price2": "13,90 €"
+        },
+        {
+          "code": "",
+          "name": "Saint-Émilion Grand Cru",
+          "price": "36,90 €",
+          "price2": "—"
+        },
+        {
+          "code": "",
+          "name": "Chinon",
+          "price": "17,90 €",
+          "price2": "9,90 €"
+        },
+        {
+          "code": "",
+          "name": "Saumur",
+          "price": "16,90 €",
+          "price2": "9,90 €"
+        }
+      ]
+    },
+    {
+      "group": "Boissons",
+      "category": "Vins blancs & champagne",
+      "cols": true,
+      "items": [
+        {
+          "code": "",
+          "name": "Muscadet",
+          "price": "15,90 €",
+          "price2": "8,90 €"
+        },
+        {
+          "code": "",
+          "name": "Riesling",
+          "price": "17,90 €",
+          "price2": "9,90 €"
+        },
+        {
+          "code": "",
+          "name": "Champagne G.H. Mumm",
+          "price": "65,00 €",
+          "price2": "—"
+        }
+      ]
+    },
+    {
+      "group": "Boissons",
+      "category": "Digestifs",
+      "items": [
+        {
+          "code": "",
+          "name": "Alcool de riz (Meikwei lu) (2cl)",
+          "price": "4,50 €"
+        },
+        {
+          "code": "",
+          "name": "Cognac (4cl)",
+          "price": "7,00 €"
+        },
+        {
+          "code": "",
+          "name": "Crème de banane (4cl)",
+          "price": "4,80 €"
+        },
+        {
+          "code": "",
+          "name": "Vodka (4cl)",
+          "price": "4,80 €"
+        },
+        {
+          "code": "",
+          "name": "Gin (4cl)",
+          "price": "4,80 €"
+        }
+      ]
+    }
+  ]
+};
+
+function heatMark(n){ if(!n) return ""; let s='<span class="heat" title="'+tr(n>1?"Très piquant":"Piquant")+'">'; for(let i=0;i<n;i++) s+='<svg class="pep"><use href="#pep"/></svg>'; return s+"</span>"; }
+
+async function loadMenu(){
+  let menu = FALLBACK;
+  if (location.protocol === "http:" || location.protocol === "https:") {
+    try {
+      const ctrl = new AbortController();
+      const to = setTimeout(() => ctrl.abort(), 6000);
+      const r = await fetch("/api/menu", { headers:{Accept:"application/json"}, signal: ctrl.signal });
+      clearTimeout(to);
+      if (r.ok) {
+        const d = await r.json();
+        if (d && Array.isArray(d.formules) && Array.isArray(d.carte)) menu = d;
+      }
+    } catch(e){}
+  }
+  renderFormules(menu.formules);
+  renderCarte(menu.carte);
+  window.__rerenderMenu = () => { renderFormules(menu.formules); renderCarte(menu.carte); };
+}
+
+function renderFormules(formules){
+  const host = document.getElementById("formules");
+  host.innerHTML = formules.map(f => `
+    <article class="formule${f.featured ? " feat" : ""}">
+      <div class="formule-top">
+        <div class="formule-name">${f.featured ? '<span class="star">'+tr("Spécialité maison")+'</span>' : ''}${tr(f.name)}</div>
+        <div class="formule-price">${f.price}</div>
+      </div>
+      ${f.sections.map(s => `
+        <div class="fsection">
+          <h4>${tr(s.title)}${s.note ? ` <em>${s.note}</em>` : ""}</h4>
+          ${s.items.map(it => `
+            <div class="fitem">
+              <span class="code">${it.code}</span>
+              <span class="nm">${tr(it.name)}${heatMark(it.heat)}${it.desc ? ` <small>(${tr(it.desc)})</small>` : ""}</span>
+              <span class="supp">${it.supp || ""}</span>
+            </div>`).join("")}
+        </div>`).join("")}
+    </article>`).join("");
+}
+
+function renderCarte(carte){
+  const tabs = document.getElementById("menuTabs");
+  const list = document.getElementById("menuList");
+  const groups = [];
+  carte.forEach(c => { const g = c.group || c.category; if (!groups.includes(g)) groups.push(g); });
+  tabs.innerHTML = "";
+  groups.forEach((g,i) => {
+    const b = document.createElement("button");
+    b.textContent = tr(g); if (i===0) b.classList.add("active");
+    b.onclick = () => { [...tabs.children].forEach(x=>x.classList.remove("active")); b.classList.add("active"); draw(g); list.scrollIntoView({block:"nearest"}); };
+    tabs.appendChild(b);
+  });
+  function dishRow(it){
+    const price = it.price2
+      ? `<span class="price">${it.price}<span class="price2">${it.price2}</span></span>`
+      : `<span class="price">${it.price}</span>`;
+    const code = it.code ? `<span class="code">${it.code}</span>` : "";
+    return `<div class="dish${it.code?"":" nocode"}">${code}<span class="name">${tr(it.name)}${heatMark(it.heat)}${it.veg?vegMark():""}${it.desc?`<small>${tr(it.desc)}</small>`:""}</span>${price}</div>`;
+  }
+  function draw(group){
+    const cats = carte.filter(c => (c.group||c.category) === group);
+    list.innerHTML = cats.map(cat => `
+      <div class="cat-block${cat.cols?" cols":""}">
+        <div class="cat-head"><span>${tr(cat.category)}</span>${cat.note?` <em>${tr(cat.note)}</em>`:""}${cat.cols?'<span class="colhead">75cl&nbsp;&nbsp;·&nbsp;&nbsp;37,5cl</span>':""}</div>
+        <div class="cat-items">${cat.items.map(dishRow).join("")}</div>
+      </div>`).join("");
+  }
+  draw(groups[0]);
+}
+
+function vegMark(){ return '<span class="veg" title="'+tr("Végétarien")+'"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5c.5-4.5 4-8.5 11-9.5-.5 7-4.5 10.5-9.5 9.5 1-3 3-4.8 6-5.8-3.6.8-5.6 2.6-7.5 5.8z"/></svg></span>'; }
+
+/* ---------- Réservation ---------- */
+function initForm(){
+  const timeSel = document.getElementById("time"), guestSel = document.getElementById("guests");
+  const slots = [];
+  for (let h=12;h<=14;h++) for (const m of [0,30]) { if(h===14&&m===30) break; slots.push(h+":"+(m===0?"00":m)); }
+  for (let h=19;h<=22;h++) for (const m of [0,30]) { if(h===22&&m===30) break; slots.push(h+":"+(m===0?"00":m)); }
+  timeSel.innerHTML = slots.map(s=>`<option>${s}</option>`).join("");
+  function renderGuests(){ guestSel.innerHTML = Array.from({length:8},(_,i)=>i+1).map(n=>`<option value="${n}">${n} ${n>1?t("guests.many"):t("guests.one")}</option>`).join(""); }
+  renderGuests(); window.__renderGuests = renderGuests;
+  guestSel.value = "2";
+  const today = new Date().toISOString().split("T")[0];
+  const dateEl = document.getElementById("date"); dateEl.min = today; dateEl.value = today;
+
+  const form = document.getElementById("bookForm"), toast = document.getElementById("toast"), btn = document.getElementById("bookBtn");
+  const $ = (id) => document.getElementById(id);
+  // Coordonnées du restaurant. Renseignez RESTO.email pour recevoir les
+  // réservations par e-mail quand le site est hébergé SANS serveur.
+  // ▼▼ Réception des réservations par e-mail — sans serveur, via FormSubmit ▼▼
+  const RESTO = {
+    tel: "+33145542019",
+    telDisplay: "01 45 54 20 19",
+    // Chaque réservation est envoyée à cette adresse. Aucun compte à créer.
+    // ⚠️ IMPORTANT — à la 1re réservation (faites-en une vous-même pour tester),
+    //    un e-mail « Activate Form » arrive sur l'adresse ci-dessous : cliquez sur
+    //    le bouton pour activer (une seule fois). Ensuite tout arrive dans la boîte.
+    formEndpoint: "https://formsubmit.co/ajax/nico64219@gmail.com",
+    // Repli si le service est indisponible : ouvre un e-mail prérempli chez le client.
+    email: "nico64219@gmail.com"
+  };
+  // ▲▲ ----------------------------------------------------------- ▲▲
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); toast.className = "toast";
+    const p = { name:$("name").value.trim(), phone:$("phone").value.trim(), email:$("email").value.trim(), date:dateEl.value, time:timeSel.value, guests:Number(guestSel.value), notes:$("notes").value.trim() };
+    if (!p.name || !p.phone || !p.email || !p.date) { toast.className="toast err"; toast.innerHTML=t("toast.err"); return; }
+    btn.disabled = true; btn.textContent = t("form.sending");
+
+    const online = location.protocol === "http:" || location.protocol === "https:";
+    let saved = false, ref = "";
+
+    // 1) Serveur Node intégré (site lancé via « npm start ») → enregistre en base
+    if (online) {
+      try {
+        const ctrl = new AbortController();
+        const to = setTimeout(() => ctrl.abort(), 7000);
+        const r = await fetch("/api/reservations", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(p), signal: ctrl.signal });
+        clearTimeout(to);
+        if (r.ok) { const d = await r.json(); ref = d.ref || ""; saved = true; }
+      } catch(err) { saved = false; }
+    }
+
+    // 2) FormSubmit → envoie la réservation par e-mail (marche sur tout hébergement)
+    if (!saved && RESTO.formEndpoint) {
+      try {
+        const ctrl = new AbortController();
+        const to = setTimeout(() => ctrl.abort(), 8000);
+        const r = await fetch(RESTO.formEndpoint, {
+          method:"POST",
+          headers:{ "Accept":"application/json", "Content-Type":"application/json" },
+          body: JSON.stringify({
+            Nom: p.name, Téléphone: p.phone, "E-mail": p.email,
+            Date: frDate(p.date), Heure: p.time, Couverts: p.guests, Note: p.notes || "—",
+            _subject: `Réservation — ${p.name} (${p.guests} pers.)`,
+            _template: "table",
+            _captcha: "false"
+          }),
+          signal: ctrl.signal
+        });
+        clearTimeout(to);
+        if (r.ok) saved = true;
+      } catch(err) { saved = false; }
+    }
+
+    if (saved) {
+      toast.className="toast ok";
+      toast.innerHTML = t("toast.saved").replace("{ref}", ref ? (t("toast.ref")+" "+ref+". ") : "");
+    } else {
+      const sujet = encodeURIComponent(`Réservation — ${p.name} (${p.guests} pers.)`);
+      const corps = encodeURIComponent(`Bonjour,\n\nJe souhaite réserver une table :\n\n• Nom : ${p.name}\n• Téléphone : ${p.phone}\n• E-mail : ${p.email}\n• Date : ${frDate(p.date)}\n• Heure : ${p.time}\n• Couverts : ${p.guests}\n• Note : ${p.notes || "—"}\n\nMerci !`);
+      const mail = RESTO.email ? `mailto:${RESTO.email}?subject=${sujet}&body=${corps}` : "";
+      if (mail) { try { window.location.href = mail; } catch(e){} }
+      toast.className="toast ok";
+      const phoneLink = `<a href="tel:${RESTO.tel}" style="color:inherit;text-decoration:underline"><b>${RESTO.telDisplay}</b></a>`;
+      toast.innerHTML = t("toast.fallback").replace("{mail}", mail ? t("toast.mailOpens") : "").replace("{phone}", phoneLink);
+    }
+    form.reset(); dateEl.value=today; guestSel.value="2";
+    btn.disabled=false; btn.textContent=t("form.submit");
+  });
+}
+function frDate(d){ try{ return new Date(d).toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"}); }catch(e){ return d; } }
+
+/* ---------- Thème, nav, reveal ---------- */
+function initUI(){
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  const themeBtn = document.getElementById("themeBtn");
+  themeBtn.addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    const next = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("pj-theme", next); } catch(e){}
+  });
+
+  const burger = document.getElementById("burger"), links = document.getElementById("navlinks");
+  burger.addEventListener("click", () => links.classList.toggle("open"));
+  links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => links.classList.remove("open")));
+
+  const io = new IntersectionObserver((es) => { es.forEach(en => { if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } }); }, { threshold:0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+}
+
+
+/* ---------- i18n (FR/EN/ZH/ES/DE/AR) ---------- */
+const I18N = {"fr": {"nav.home": "La maison", "nav.menu": "Menus & carte", "nav.find": "Nous trouver", "nav.book": "Réserver", "nav.cta": "Réserver", "hero.eyebrow": "Cuisine chinoise · thaï · vietnamienne", "hero.h1": "Une table de quartier<br>aux <em>saveurs généreuses</em>.", "hero.lead": "Au 96 rue Balard, le Palais de Joie réunit classiques cantonais, woks thaïs parfumés et menus maison. Cadre rénové, prix justes, l'accueil de Nico & Jojo.", "hero.btnBook": "Réserver une table", "hero.btnOrder": "Commander sur Uber Eats", "hero.btnMenu": "Voir les menus", "hero.m1b": "4 menus", "hero.m1s": "de 13,90 à 22,90 €", "hero.m2s": "du métro Balard", "hero.m3b": "Midi & soir", "hero.m3s": "service 7j/7*", "hero.badge": "« Toujours aussi agréable »", "hero.badgeSub": "— avis client, rue Balard", "strip.1": "Fait maison", "strip.2": "Terrasse", "strip.3": "Climatisé", "strip.4": "À emporter & livraison", "strip.5": "Titres-restaurant", "strip.6": "Accès PMR", "histoire.label": "La maison", "histoire.h2": "Un palais discret au cœur du 15<sup>e</sup>.", "histoire.intro": "Récemment rénové, l'établissement marie saveurs chinoises, thaïes et touches françaises dans un cadre chaleureux.", "histoire.quote": "« Après six ans d'absence, nous avons retrouvé ce restaurant toujours aussi agréable : très accueillant, et des saveurs généreuses. »", "histoire.p2": "Le Palais de Joie, c'est une cuisine qui ne triche pas — un riz cantonais qui fait l'unanimité, un canard laqué préparé avec soin, des spécialités thaïes relevées juste comme il faut. On vient pour manger bien, sans cérémonie, à deux pas du parc André-Citroën.", "histoire.p3": "Sur place en salle climatisée, en terrasse aux beaux jours, à emporter ou en livraison : à vous de choisir.", "pil.1b": "Wok & braise", "pil.1s": "Sautés minute, parfums francs, cuissons maîtrisées.", "pil.2b": "Esprit maison", "pil.2s": "L'accueil de Nico & Jojo, comme à la maison.", "pil.3b": "Prix justes", "pil.3s": "Le bon rapport qualité-prix du quartier.", "pil.4b": "Trois cuisines", "pil.4s": "Chine, Thaïlande, Vietnam sur une même carte.", "menu.label": "Menus & carte", "menu.h2": "Quatre menus, et la carte.", "menu.intro": "Entrée, plat, accompagnement et dessert au choix dans chaque menu. Plats également disponibles à la carte.", "menu.sub1": "Nos 4 menus", "menu.sub2": "À la carte", "menu.footTxt": "Carte non exhaustive · les prix peuvent évoluer. Allergies & régimes : prévenez-nous, on adapte.", "menu.spicy": "piquant", "menu.footBtn": "Réserver pour goûter", "res.label": "Réservation", "res.h2": "Réservez votre table.", "res.intro": "Confirmation par téléphone. Pour les grandes tablées (8+) ou un événement, appelez-nous directement.", "res.addr": "Adresse", "res.phone": "Téléphone", "res.hours": "Horaires", "hours.wk": "Lun – Ven, Dim", "hours.sat": "Samedi", "form.h3": "Demande de réservation", "form.sub": "Remplissez le formulaire, on vous garde une table.", "form.name": "Nom", "form.namePh": "Votre nom", "form.phone": "Téléphone", "form.email": "E-mail", "form.emailPh": "vous@exemple.fr", "form.date": "Date", "form.time": "Heure", "form.guests": "Couverts", "form.notes": "Demande particulière", "form.notesPh": "Allergie, terrasse, chaise haute…", "form.submit": "Envoyer la demande", "form.sending": "Envoi en cours…", "form.note": "En envoyant, vous acceptez d'être recontacté pour confirmer.", "adr.label": "Nous trouver", "adr.h2": "À deux pas du métro Balard.", "adr.intro": "Au pied de la ligne 8, à côté du parc André-Citroën, dans le quartier Vaugirard.", "adr.chip1": "Métro Balard · 89 m", "adr.chip2": "Parking Indigo Citroën · 296 m", "adr.chip3": "Parc André-Citroën", "adr.amenities": "Salle climatisée, terrasse, accès PMR, wifi, animaux bienvenus. Cartes & titres-restaurant acceptés.", "adr.route": "Itinéraire", "adr.call": "Appeler le resto", "foot.brandDesc": "Restaurant chinois, thaï & vietnamien. 96 rue Balard, Paris 15<sup>e</sup>.", "foot.visit": "Visiter", "foot.contact": "Contact", "foot.hours": "Horaires", "foot.order": "Commander sur Uber Eats ↗", "foot.hoursWk": "Lun–Ven, Dim : 12h–14h30 · 19h–22h30", "foot.hoursSat": "Samedi : 19h–22h30", "foot.rights": "Au Palais de Joie — Nicosef · Tous droits réservés", "foot.demo": "Site démo · *horaires indicatifs, vérifiez par téléphone", "guests.one": "personne", "guests.many": "personnes", "toast.ref": "Réf.", "toast.err": "<b>Oups —</b>&nbsp;merci de remplir nom, téléphone, e-mail et date.", "toast.saved": "<b>Demande bien reçue !</b>&nbsp;{ref}Votre table n'est pas encore garantie : vous recevrez un <b>e-mail de confirmation</b> dès que le restaurant aura validé votre demande. Merci !", "toast.mailOpens": "Votre e-mail de réservation s'ouvre, il ne reste qu'à l'envoyer. ", "toast.fallback": "<b>Presque terminé !</b>&nbsp;{mail}Appelez-nous au {phone} pour confirmer tout de suite.", "langName": "Langue"}, "en": {"nav.home": "The House", "nav.menu": "Menus & à la carte", "nav.find": "Find us", "nav.book": "Book", "nav.cta": "Book", "hero.eyebrow": "Chinese · Thai · Vietnamese cuisine", "hero.h1": "A neighbourhood table<br>with <em>generous flavours</em>.", "hero.lead": "At 96 rue Balard, Le Palais de Joie brings together Cantonese classics, fragrant Thai woks and house set menus. A refreshed setting, fair prices and a warm welcome from Nico & Jojo.", "hero.btnBook": "Book a table", "hero.btnOrder": "Order on Uber Eats", "hero.btnMenu": "See the menus", "hero.m1b": "4 set menus", "hero.m1s": "from €13.90 to €22.90", "hero.m2s": "from Balard metro", "hero.m3b": "Lunch & dinner", "hero.m3s": "open 7 days*", "hero.badge": "“As lovely as ever”", "hero.badgeSub": "— customer review, rue Balard", "strip.1": "Homemade", "strip.2": "Terrace", "strip.3": "Air-conditioned", "strip.4": "Takeaway & delivery", "strip.5": "Meal vouchers", "strip.6": "Wheelchair access", "histoire.label": "The House", "histoire.h2": "A quiet palace in the heart of the 15<sup>th</sup>.", "histoire.intro": "Recently renovated, the restaurant blends Chinese and Thai flavours with French touches in a warm setting.", "histoire.quote": "“After six years away, we found this restaurant as lovely as ever: very welcoming, with generous flavours.”", "histoire.p2": "Le Palais de Joie is honest cooking — a Cantonese fried rice everyone agrees on, lacquered duck made with care, Thai specialities spiced just right. You come to eat well, without fuss, a stone's throw from Parc André-Citroën.", "histoire.p3": "Dine in our air-conditioned room, on the terrace in fine weather, takeaway or delivery — the choice is yours.", "pil.1b": "Wok & embers", "pil.1s": "Quick stir-fries, clean aromas, precise cooking.", "pil.2b": "Family spirit", "pil.2s": "Nico & Jojo's welcome, just like home.", "pil.3b": "Fair prices", "pil.3s": "The neighbourhood's best value.", "pil.4b": "Three cuisines", "pil.4s": "China, Thailand and Vietnam on one menu.", "menu.label": "Menus & à la carte", "menu.h2": "Four set menus, plus the à la carte.", "menu.intro": "Starter, main, side and dessert of your choice in every set menu. Dishes also available à la carte.", "menu.sub1": "Our 4 set menus", "menu.sub2": "À la carte", "menu.footTxt": "Menu not exhaustive · prices may change. Allergies & dietary needs: let us know and we'll adapt.", "menu.spicy": "spicy", "menu.footBtn": "Book to taste", "res.label": "Reservation", "res.h2": "Book your table.", "res.intro": "Confirmation by phone. For large groups (8+) or an event, please call us directly.", "res.addr": "Address", "res.phone": "Phone", "res.hours": "Hours", "hours.wk": "Mon–Fri, Sun", "hours.sat": "Saturday", "form.h3": "Booking request", "form.sub": "Fill in the form and we'll hold a table for you.", "form.name": "Name", "form.namePh": "Your name", "form.phone": "Phone", "form.email": "Email", "form.emailPh": "you@example.com", "form.date": "Date", "form.time": "Time", "form.guests": "Guests", "form.notes": "Special request", "form.notesPh": "Allergy, terrace, high chair…", "form.submit": "Send request", "form.sending": "Sending…", "form.note": "By sending, you agree to be contacted to confirm.", "adr.label": "Find us", "adr.h2": "Steps from Balard metro.", "adr.intro": "At the foot of line 8, beside Parc André-Citroën, in the Vaugirard district.", "adr.chip1": "Balard metro · 89 m", "adr.chip2": "Indigo Citroën car park · 296 m", "adr.chip3": "Parc André-Citroën", "adr.amenities": "Air-conditioned room, terrace, wheelchair access, wifi, pets welcome. Cards & meal vouchers accepted.", "adr.route": "Directions", "adr.call": "Call the restaurant", "foot.brandDesc": "Chinese, Thai & Vietnamese restaurant. 96 rue Balard, Paris 15<sup>th</sup>.", "foot.visit": "Explore", "foot.contact": "Contact", "foot.hours": "Hours", "foot.order": "Order on Uber Eats ↗", "foot.hoursWk": "Mon–Fri, Sun: 12–2:30pm · 7–10:30pm", "foot.hoursSat": "Saturday: 7–10:30pm", "foot.rights": "Au Palais de Joie — Nicosef · All rights reserved", "foot.demo": "Demo site · *hours indicative, please check by phone", "guests.one": "guest", "guests.many": "guests", "toast.ref": "Ref.", "toast.err": "<b>Oops —</b>&nbsp;please fill in name, phone, email and date.", "toast.saved": "<b>Request received!</b>&nbsp;{ref}Your table isn't guaranteed yet: you'll get a <b>confirmation email</b> as soon as the restaurant approves it. Thank you!", "toast.mailOpens": "Your booking email is opening — just hit send. ", "toast.fallback": "<b>Almost done!</b>&nbsp;{mail}Call us at {phone} to confirm right away.", "langName": "Language"}, "zh": {"nav.home": "本店", "nav.menu": "套餐与菜单", "nav.find": "如何找到我们", "nav.book": "预订", "nav.cta": "预订", "hero.eyebrow": "中餐 · 泰餐 · 越南菜", "hero.h1": "街角小馆<br><em>滋味丰盈</em>。", "hero.lead": "位于巴拉尔街96号，喜悦宫汇聚广式经典、香气四溢的泰式炒锅与实惠套餐。环境一新，价格公道，Nico 与 Jojo 热情待客。", "hero.btnBook": "预订餐桌", "hero.btnOrder": "在 Uber Eats 下单", "hero.btnMenu": "查看菜单", "hero.m1b": "4 款套餐", "hero.m1s": "13.90–22.90 €", "hero.m2s": "距巴拉尔地铁站", "hero.m3b": "午餐与晚餐", "hero.m3s": "全周营业*", "hero.badge": "“一如既往的舒心”", "hero.badgeSub": "— 顾客评价，巴拉尔街", "strip.1": "手工现做", "strip.2": "露台", "strip.3": "空调", "strip.4": "外带与外送", "strip.5": "餐券", "strip.6": "无障碍通道", "histoire.label": "本店", "histoire.h2": "巴黎15区中心一座低调的“宫殿”。", "histoire.intro": "近期翻新，餐厅在温馨的环境中融合中式、泰式风味与法式细节。", "histoire.quote": "“阔别六年，再来这家餐厅依旧那么舒心：待客热情，滋味丰盈。”", "histoire.p2": "喜悦宫的菜实在不做作——人人称赞的扬州炒饭、用心烹制的脆皮烤鸭、辣度恰到好处的泰式招牌菜。来这里就是好好吃饭，不讲排场，紧邻安德烈·雪铁龙公园。", "histoire.p3": "空调堂食、晴日露台、外带或外送：任您选择。", "pil.1b": "锅气与炭火", "pil.1s": "猛火快炒，香气分明，火候到位。", "pil.2b": "家的氛围", "pil.2s": "Nico 与 Jojo 的款待，宾至如归。", "pil.3b": "公道价格", "pil.3s": "本区高性价比之选。", "pil.4b": "三国风味", "pil.4s": "中国、泰国、越南，同聚一张菜单。", "menu.label": "套餐与菜单", "menu.h2": "四款套餐，外加单点菜单。", "menu.intro": "每款套餐均可自选前菜、主菜、配菜与甜点。各菜亦可单点。", "menu.sub1": "我们的 4 款套餐", "menu.sub2": "单点菜单", "menu.footTxt": "菜单未尽列 · 价格可能调整。过敏或特殊饮食：请告知，我们会配合。", "menu.spicy": "辣", "menu.footBtn": "预订品尝", "res.label": "预订", "res.h2": "预订您的餐桌。", "res.intro": "电话确认。8人以上大桌或活动，请直接致电我们。", "res.addr": "地址", "res.phone": "电话", "res.hours": "营业时间", "hours.wk": "周一至周五、周日", "hours.sat": "周六", "form.h3": "预订申请", "form.sub": "填写表单，我们为您留位。", "form.name": "姓名", "form.namePh": "您的姓名", "form.phone": "电话", "form.email": "电子邮箱", "form.emailPh": "you@example.com", "form.date": "日期", "form.time": "时间", "form.guests": "人数", "form.notes": "特殊需求", "form.notesPh": "过敏、露台、儿童高椅……", "form.submit": "提交申请", "form.sending": "提交中…", "form.note": "提交即表示您同意我们与您联系以确认。", "adr.label": "如何找到我们", "adr.h2": "紧邻巴拉尔地铁站。", "adr.intro": "位于地铁8号线旁，毗邻安德烈·雪铁龙公园，沃吉拉尔街区。", "adr.chip1": "巴拉尔地铁 · 89 米", "adr.chip2": "Indigo Citroën 停车场 · 296 米", "adr.chip3": "安德烈·雪铁龙公园", "adr.amenities": "空调用餐区、露台、无障碍通道、wifi、欢迎携带宠物。可刷卡，接受餐券。", "adr.route": "导航路线", "adr.call": "致电餐厅", "foot.brandDesc": "中式、泰式与越南餐厅。巴拉尔街96号，巴黎15区。", "foot.visit": "浏览", "foot.contact": "联系", "foot.hours": "营业时间", "foot.order": "在 Uber Eats 下单 ↗", "foot.hoursWk": "周一至周五、周日：12:00–14:30 · 19:00–22:30", "foot.hoursSat": "周六：19:00–22:30", "foot.rights": "Au Palais de Joie — Nicosef · 版权所有", "foot.demo": "演示站点 · *营业时间仅供参考，请电话确认", "guests.one": "人", "guests.many": "人", "toast.ref": "编号", "toast.err": "<b>提示 —</b>&nbsp;请填写姓名、电话、邮箱和日期。", "toast.saved": "<b>已收到您的申请！</b>&nbsp;{ref}餐位尚未最终确认：餐厅审核通过后，您将收到一封<b>确认邮件</b>。谢谢！", "toast.mailOpens": "预订邮件即将打开，发送即可。", "toast.fallback": "<b>就快好了！</b>&nbsp;{mail}致电 {phone} 即可立即确认。", "langName": "语言"}, "es": {"nav.home": "La Casa", "nav.menu": "Menús y carta", "nav.find": "Cómo llegar", "nav.book": "Reservar", "nav.cta": "Reservar", "hero.eyebrow": "Cocina china · tailandesa · vietnamita", "hero.h1": "Una mesa de barrio<br>de <em>sabores generosos</em>.", "hero.lead": "En el 96 de la rue Balard, Le Palais de Joie reúne clásicos cantoneses, salteados tailandeses aromáticos y menús de la casa. Un local renovado, precios justos y la acogida de Nico y Jojo.", "hero.btnBook": "Reservar mesa", "hero.btnOrder": "Pedir en Uber Eats", "hero.btnMenu": "Ver los menús", "hero.m1b": "4 menús", "hero.m1s": "de 13,90 a 22,90 €", "hero.m2s": "del metro Balard", "hero.m3b": "Mediodía y noche", "hero.m3s": "abierto 7 días*", "hero.badge": "«Tan agradable como siempre»", "hero.badgeSub": "— reseña de cliente, rue Balard", "strip.1": "Casero", "strip.2": "Terraza", "strip.3": "Climatizado", "strip.4": "Para llevar y a domicilio", "strip.5": "Vales de comida", "strip.6": "Acceso adaptado", "histoire.label": "La Casa", "histoire.h2": "Un palacio discreto en el corazón del distrito 15.", "histoire.intro": "Recientemente renovado, el local combina sabores chinos y tailandeses con toques franceses en un ambiente acogedor.", "histoire.quote": "«Tras seis años de ausencia, reencontramos este restaurante tan agradable como siempre: muy acogedor y de sabores generosos.»", "histoire.p2": "Le Palais de Joie es cocina sin trampas: un arroz cantonés que gusta a todos, un pato laqueado preparado con esmero, especialidades tailandesas en su punto de picante. Se viene a comer bien, sin ceremonias, a dos pasos del parque André-Citroën.", "histoire.p3": "En la sala climatizada, en la terraza cuando hace buen tiempo, para llevar o a domicilio: usted elige.", "pil.1b": "Wok y brasa", "pil.1s": "Salteados al momento, aromas nítidos, cocciones precisas.", "pil.2b": "Espíritu de casa", "pil.2s": "La acogida de Nico y Jojo, como en casa.", "pil.3b": "Precios justos", "pil.3s": "La mejor relación calidad-precio del barrio.", "pil.4b": "Tres cocinas", "pil.4s": "China, Tailandia y Vietnam en una misma carta.", "menu.label": "Menús y carta", "menu.h2": "Cuatro menús y la carta.", "menu.intro": "Entrante, plato, guarnición y postre a elegir en cada menú. Los platos también están disponibles a la carta.", "menu.sub1": "Nuestros 4 menús", "menu.sub2": "A la carta", "menu.footTxt": "Carta no exhaustiva · los precios pueden variar. Alergias y dietas: avísenos y lo adaptamos.", "menu.spicy": "picante", "menu.footBtn": "Reserva para probar", "res.label": "Reserva", "res.h2": "Reserve su mesa.", "res.intro": "Confirmación por teléfono. Para grupos grandes (8+) o un evento, llámenos directamente.", "res.addr": "Dirección", "res.phone": "Teléfono", "res.hours": "Horario", "hours.wk": "Lun–Vie, Dom", "hours.sat": "Sábado", "form.h3": "Solicitud de reserva", "form.sub": "Rellene el formulario y le guardamos una mesa.", "form.name": "Nombre", "form.namePh": "Su nombre", "form.phone": "Teléfono", "form.email": "Correo electrónico", "form.emailPh": "tu@ejemplo.com", "form.date": "Fecha", "form.time": "Hora", "form.guests": "Comensales", "form.notes": "Petición especial", "form.notesPh": "Alergia, terraza, trona…", "form.submit": "Enviar solicitud", "form.sending": "Enviando…", "form.note": "Al enviar, acepta que le contactemos para confirmar.", "adr.label": "Cómo llegar", "adr.h2": "A dos pasos del metro Balard.", "adr.intro": "Al pie de la línea 8, junto al parque André-Citroën, en el barrio de Vaugirard.", "adr.chip1": "Metro Balard · 89 m", "adr.chip2": "Parking Indigo Citroën · 296 m", "adr.chip3": "Parque André-Citroën", "adr.amenities": "Sala climatizada, terraza, acceso adaptado, wifi, mascotas bienvenidas. Se aceptan tarjetas y vales de comida.", "adr.route": "Cómo llegar", "adr.call": "Llamar al restaurante", "foot.brandDesc": "Restaurante chino, tailandés y vietnamita. 96 rue Balard, París 15.", "foot.visit": "Explorar", "foot.contact": "Contacto", "foot.hours": "Horario", "foot.order": "Pedir en Uber Eats ↗", "foot.hoursWk": "Lun–Vie, Dom: 12:00–14:30 · 19:00–22:30", "foot.hoursSat": "Sábado: 19:00–22:30", "foot.rights": "Au Palais de Joie — Nicosef · Todos los derechos reservados", "foot.demo": "Sitio demo · *horario orientativo, confírmelo por teléfono", "guests.one": "persona", "guests.many": "personas", "toast.ref": "Ref.", "toast.err": "<b>Vaya —</b>&nbsp;rellene nombre, teléfono, correo y fecha.", "toast.saved": "<b>¡Solicitud recibida!</b>&nbsp;{ref}Su mesa aún no está garantizada: recibirá un <b>correo de confirmación</b> en cuanto el restaurante la valide. ¡Gracias!", "toast.mailOpens": "Se abre su correo de reserva, solo falta enviarlo. ", "toast.fallback": "<b>¡Casi listo!</b>&nbsp;{mail}Llámenos al {phone} para confirmar ahora mismo.", "langName": "Idioma"}, "de": {"nav.home": "Das Haus", "nav.menu": "Menüs & Karte", "nav.find": "Anfahrt", "nav.book": "Reservieren", "nav.cta": "Reservieren", "hero.eyebrow": "Chinesische · thailändische · vietnamesische Küche", "hero.h1": "Ein Lokal im Viertel<br>mit <em>großzügigen Aromen</em>.", "hero.lead": "In der Rue Balard 96 vereint Le Palais de Joie kantonesische Klassiker, duftende thailändische Woks und hausgemachte Menüs. Renoviertes Ambiente, faire Preise und der herzliche Empfang von Nico & Jojo.", "hero.btnBook": "Tisch reservieren", "hero.btnOrder": "Auf Uber Eats bestellen", "hero.btnMenu": "Menüs ansehen", "hero.m1b": "4 Menüs", "hero.m1s": "von 13,90 bis 22,90 €", "hero.m2s": "von der Metro Balard", "hero.m3b": "Mittags & abends", "hero.m3s": "täglich geöffnet*", "hero.badge": "„Immer wieder schön“", "hero.badgeSub": "— Kundenbewertung, Rue Balard", "strip.1": "Hausgemacht", "strip.2": "Terrasse", "strip.3": "Klimatisiert", "strip.4": "Zum Mitnehmen & Lieferung", "strip.5": "Essensgutscheine", "strip.6": "Barrierefrei", "histoire.label": "Das Haus", "histoire.h2": "Ein stiller Palast im Herzen des 15. Arrondissements.", "histoire.intro": "Kürzlich renoviert, verbindet das Lokal chinesische und thailändische Aromen mit französischen Akzenten in gemütlichem Rahmen.", "histoire.quote": "„Nach sechs Jahren Abwesenheit fanden wir dieses Restaurant so angenehm wie immer: sehr einladend und mit großzügigen Aromen.“", "histoire.p2": "Le Palais de Joie ist ehrliche Küche – ein kantonesischer Bratreis, der allen schmeckt, eine sorgfältig zubereitete Laquierte Ente, thailändische Spezialitäten genau richtig gewürzt. Man kommt, um gut zu essen, ohne Schnickschnack, nur einen Steinwurf vom Parc André-Citroën entfernt.", "histoire.p3": "Im klimatisierten Saal, bei schönem Wetter auf der Terrasse, zum Mitnehmen oder als Lieferung – Sie haben die Wahl.", "pil.1b": "Wok & Glut", "pil.1s": "Minutenschnelle Pfannengerichte, klare Aromen, perfekter Garpunkt.", "pil.2b": "Familiäres Flair", "pil.2s": "Der Empfang von Nico & Jojo, wie zu Hause.", "pil.3b": "Faire Preise", "pil.3s": "Das beste Preis-Leistungs-Verhältnis im Viertel.", "pil.4b": "Drei Küchen", "pil.4s": "China, Thailand und Vietnam auf einer Karte.", "menu.label": "Menüs & Karte", "menu.h2": "Vier Menüs und die Karte.", "menu.intro": "Vorspeise, Hauptgericht, Beilage und Dessert nach Wahl in jedem Menü. Gerichte auch à la carte erhältlich.", "menu.sub1": "Unsere 4 Menüs", "menu.sub2": "À la carte", "menu.footTxt": "Karte nicht vollständig · Preise können sich ändern. Allergien & Ernährungswünsche: sagen Sie Bescheid, wir passen an.", "menu.spicy": "scharf", "menu.footBtn": "Reservieren & probieren", "res.label": "Reservierung", "res.h2": "Reservieren Sie Ihren Tisch.", "res.intro": "Bestätigung per Telefon. Für große Gruppen (ab 8) oder Veranstaltungen rufen Sie uns bitte direkt an.", "res.addr": "Adresse", "res.phone": "Telefon", "res.hours": "Öffnungszeiten", "hours.wk": "Mo–Fr, So", "hours.sat": "Samstag", "form.h3": "Reservierungsanfrage", "form.sub": "Füllen Sie das Formular aus, wir halten einen Tisch für Sie frei.", "form.name": "Name", "form.namePh": "Ihr Name", "form.phone": "Telefon", "form.email": "E-Mail", "form.emailPh": "sie@beispiel.de", "form.date": "Datum", "form.time": "Uhrzeit", "form.guests": "Personen", "form.notes": "Besonderer Wunsch", "form.notesPh": "Allergie, Terrasse, Hochstuhl…", "form.submit": "Anfrage senden", "form.sending": "Wird gesendet…", "form.note": "Mit dem Absenden stimmen Sie zu, zur Bestätigung kontaktiert zu werden.", "adr.label": "Anfahrt", "adr.h2": "Nur wenige Schritte von der Metro Balard.", "adr.intro": "An der Linie 8, neben dem Parc André-Citroën, im Viertel Vaugirard.", "adr.chip1": "Metro Balard · 89 m", "adr.chip2": "Parkhaus Indigo Citroën · 296 m", "adr.chip3": "Parc André-Citroën", "adr.amenities": "Klimatisierter Saal, Terrasse, barrierefrei, WLAN, Haustiere willkommen. Karten & Essensgutscheine akzeptiert.", "adr.route": "Route", "adr.call": "Restaurant anrufen", "foot.brandDesc": "Chinesisches, thailändisches & vietnamesisches Restaurant. 96 rue Balard, Paris 15.", "foot.visit": "Entdecken", "foot.contact": "Kontakt", "foot.hours": "Öffnungszeiten", "foot.order": "Auf Uber Eats bestellen ↗", "foot.hoursWk": "Mo–Fr, So: 12:00–14:30 · 19:00–22:30", "foot.hoursSat": "Samstag: 19:00–22:30", "foot.rights": "Au Palais de Joie — Nicosef · Alle Rechte vorbehalten", "foot.demo": "Demo-Seite · *Zeiten ohne Gewähr, bitte telefonisch prüfen", "guests.one": "Person", "guests.many": "Personen", "toast.ref": "Ref.", "toast.err": "<b>Hoppla —</b>&nbsp;bitte Name, Telefon, E-Mail und Datum ausfüllen.", "toast.saved": "<b>Anfrage erhalten!</b>&nbsp;{ref}Ihr Tisch ist noch nicht garantiert: Sie erhalten eine <b>Bestätigungs-E-Mail</b>, sobald das Restaurant Ihre Anfrage freigegeben hat. Danke!", "toast.mailOpens": "Ihre Reservierungs-E-Mail öffnet sich – nur noch absenden. ", "toast.fallback": "<b>Fast geschafft!</b>&nbsp;{mail}Rufen Sie uns unter {phone} an, um sofort zu bestätigen.", "langName": "Sprache"}, "ar": {"nav.home": "عن المطعم", "nav.menu": "القوائم والأطباق", "nav.find": "موقعنا", "nav.book": "احجز", "nav.cta": "احجز", "hero.eyebrow": "مطبخ صيني · تايلاندي · فيتنامي", "hero.h1": "مائدة الحيّ<br><em>بنكهات سخيّة</em>.", "hero.lead": "في 96 شارع بالار، يجمع لو پاليه دو جوا بين الأطباق الكانتونية الكلاسيكية وأطباق الووك التايلاندية العطرة وقوائم البيت. أجواء مجدَّدة، أسعار عادلة، وحفاوة من نيكو وجوجو.", "hero.btnBook": "احجز طاولة", "hero.btnOrder": "اطلب عبر Uber Eats", "hero.btnMenu": "اطّلع على القوائم", "hero.m1b": "4 قوائم", "hero.m1s": "من 13.90 إلى 22.90 €", "hero.m2s": "من مترو بالار", "hero.m3b": "ظهراً ومساءً", "hero.m3s": "7 أيام في الأسبوع*", "hero.badge": "«لطيف كما العهد به دائماً»", "hero.badgeSub": "— رأي زبون، شارع بالار", "strip.1": "صنع منزلي", "strip.2": "تراس", "strip.3": "مكيّف", "strip.4": "طلبات خارجية وتوصيل", "strip.5": "قسائم الطعام", "strip.6": "مدخل لذوي الإعاقة", "histoire.label": "عن المطعم", "histoire.h2": "قصرٌ هادئ في قلب الدائرة الـ15.", "histoire.intro": "بعد تجديده حديثاً، يمزج المطعم النكهات الصينية والتايلاندية بلمسات فرنسية في أجواء دافئة.", "histoire.quote": "«بعد غياب ست سنوات، وجدنا هذا المطعم لطيفاً كعهدنا به: حفاوة كبيرة ونكهات سخيّة.»", "histoire.p2": "لو پاليه دو جوا مطبخٌ صادق — أرزٌ كانتوني يُجمع عليه الجميع، وبطٌّ مُحمّر يُحضَّر بعناية، وأطباق تايلاندية مُتبّلة كما يجب. تأتي لتأكل جيّداً دون تكلّف، على بُعد خطوات من حديقة أندريه-سيتروين.", "histoire.p3": "في القاعة المكيّفة، أو على التراس في الأيام المشمسة، أو طلباً خارجياً أو توصيلاً: الخيار لك.", "pil.1b": "ووك وجمر", "pil.1s": "تشويح سريع، نكهات واضحة، طهوٌ مُتقن.", "pil.2b": "روح البيت", "pil.2s": "حفاوة نيكو وجوجو، كأنك في بيتك.", "pil.3b": "أسعار عادلة", "pil.3s": "أفضل قيمة مقابل السعر في الحيّ.", "pil.4b": "ثلاثة مطابخ", "pil.4s": "الصين وتايلاند وفيتنام في قائمة واحدة.", "menu.label": "القوائم والأطباق", "menu.h2": "أربع قوائم، إضافةً إلى الأطباق المفردة.", "menu.intro": "مقبّلات وطبق رئيسي وطبق جانبي وحلوى حسب اختيارك في كل قائمة. الأطباق متوفرة أيضاً بشكل مفرد.", "menu.sub1": "قوائمنا الأربع", "menu.sub2": "أطباق مفردة", "menu.footTxt": "القائمة غير شاملة · قد تتغيّر الأسعار. الحساسية والأنظمة الغذائية: أخبرونا وسنُلائم طلبكم.", "menu.spicy": "حار", "menu.footBtn": "احجز لتتذوّق", "res.label": "الحجز", "res.h2": "احجز طاولتك.", "res.intro": "التأكيد عبر الهاتف. للمجموعات الكبيرة (8 فأكثر) أو المناسبات، اتصلوا بنا مباشرةً.", "res.addr": "العنوان", "res.phone": "الهاتف", "res.hours": "أوقات العمل", "hours.wk": "الإثنين–الجمعة، الأحد", "hours.sat": "السبت", "form.h3": "طلب حجز", "form.sub": "املأ النموذج وسنحجز لك طاولة.", "form.name": "الاسم", "form.namePh": "اسمك", "form.phone": "الهاتف", "form.email": "البريد الإلكتروني", "form.emailPh": "you@example.com", "form.date": "التاريخ", "form.time": "الوقت", "form.guests": "عدد الأشخاص", "form.notes": "طلب خاص", "form.notesPh": "حساسية، تراس، كرسي أطفال…", "form.submit": "إرسال الطلب", "form.sending": "جارٍ الإرسال…", "form.note": "بالإرسال، توافق على أن نتواصل معك للتأكيد.", "adr.label": "موقعنا", "adr.h2": "على بُعد خطوات من مترو بالار.", "adr.intro": "عند خط المترو 8، بجوار حديقة أندريه-سيتروين، في حيّ فوجيرار.", "adr.chip1": "مترو بالار · 89 م", "adr.chip2": "موقف Indigo Citroën · 296 م", "adr.chip3": "حديقة أندريه-سيتروين", "adr.amenities": "قاعة مكيّفة، تراس، مدخل لذوي الإعاقة، واي-فاي، الحيوانات الأليفة مرحَّب بها. نقبل البطاقات وقسائم الطعام.", "adr.route": "الاتجاهات", "adr.call": "اتصل بالمطعم", "foot.brandDesc": "مطعم صيني وتايلاندي وفيتنامي. 96 شارع بالار، باريس 15.", "foot.visit": "تصفّح", "foot.contact": "اتصال", "foot.hours": "أوقات العمل", "foot.order": "اطلب عبر Uber Eats ↗", "foot.hoursWk": "الإثنين–الجمعة، الأحد: 12:00–14:30 · 19:00–22:30", "foot.hoursSat": "السبت: 19:00–22:30", "foot.rights": "Au Palais de Joie — Nicosef · جميع الحقوق محفوظة", "foot.demo": "موقع تجريبي · *الأوقات إرشادية، يُرجى التأكد هاتفياً", "guests.one": "شخص", "guests.many": "أشخاص", "toast.ref": "المرجع", "toast.err": "<b>عذراً —</b>&nbsp;يرجى تعبئة الاسم والهاتف والبريد والتاريخ.", "toast.saved": "<b>تم استلام طلبك!</b>&nbsp;{ref}طاولتك ليست مؤكَّدة بعد: ستصلك <b>رسالة تأكيد بالبريد</b> فور موافقة المطعم. شكراً!", "toast.mailOpens": "تُفتح رسالة الحجز، ما عليك سوى إرسالها. ", "toast.fallback": "<b>أوشكت على الانتهاء!</b>&nbsp;{mail}اتصل بنا على {phone} للتأكيد فوراً.", "langName": "اللغة"}};
+let LANG = "fr";
+function t(key){ const d = I18N[LANG] || {}; if (key in d) return d[key]; return (I18N.fr[key] != null ? I18N.fr[key] : key); }
+function applyLang(lang){
+  if (!I18N[lang]) lang = "fr";
+  LANG = lang;
+  const root = document.documentElement;
+  root.lang = lang; root.dir = (lang === "ar") ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i18n]").forEach(el => { const v = t(el.getAttribute("data-i18n")); if (v != null) el.textContent = v; });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = t(el.getAttribute("data-i18n-html")); if (v != null) el.innerHTML = v; });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => { const v = t(el.getAttribute("data-i18n-ph")); if (v != null) el.setAttribute("placeholder", v); });
+  if (window.__renderGuests) window.__renderGuests();
+  if (window.__rerenderMenu) window.__rerenderMenu();
+  const sel = document.getElementById("langSel"); if (sel) sel.value = lang;
+  try { localStorage.setItem("pj-lang", lang); } catch(e){}
+}
+function initI18n(){
+  const sel = document.getElementById("langSel");
+  if (sel) sel.addEventListener("change", e => applyLang(e.target.value));
+  let saved = "fr"; try { saved = localStorage.getItem("pj-lang") || "fr"; } catch(e){}
+  applyLang(saved);
+}
+
+const MENU_T = {"Entrées": {"en": "Starters", "zh": "前菜", "es": "Entrantes", "de": "Vorspeisen", "ar": "المقبّلات"}, "Plats": {"en": "Mains", "zh": "主菜", "es": "Platos", "de": "Hauptgerichte", "ar": "الأطباق الرئيسية"}, "Spécialités": {"en": "Specialities", "zh": "招牌菜", "es": "Especialidades", "de": "Spezialitäten", "ar": "أطباق مميّزة"}, "Plaque chauffante": {"en": "Hot plate", "zh": "铁板烧", "es": "Plancha caliente", "de": "Heiße Platte", "ar": "الصاج الساخن"}, "Thaï": {"en": "Thai", "zh": "泰式", "es": "Tailandés", "de": "Thai", "ar": "تايلاندي"}, "Bô bun & soupes": {"en": "Bò bún & soups", "zh": "牛肉米粉与汤", "es": "Bò bún y sopas", "de": "Bò bún & Suppen", "ar": "بو بون والشوربات"}, "Riz & légumes": {"en": "Rice & vegetables", "zh": "米饭与蔬菜", "es": "Arroz y verduras", "de": "Reis & Gemüse", "ar": "الأرز والخضار"}, "Végétarien": {"en": "Vegetarian", "zh": "素食", "es": "Vegetariano", "de": "Vegetarisch", "ar": "نباتي"}, "Fondue & BBQ": {"en": "Fondue & BBQ", "zh": "火锅与烧烤", "es": "Fondue y barbacoa", "de": "Fondue & BBQ", "ar": "الفوندو والشواء"}, "Desserts": {"en": "Desserts", "zh": "甜点", "es": "Postres", "de": "Desserts", "ar": "الحلويات"}, "Boissons": {"en": "Drinks", "zh": "饮品", "es": "Bebidas", "de": "Getränke", "ar": "المشروبات"}, "Entrées & dim sum": {"en": "Starters & dim sum", "zh": "前菜与点心", "es": "Entrantes y dim sum", "de": "Vorspeisen & Dim Sum", "ar": "مقبّلات وديم سم"}, "Beignets & fritures": {"en": "Fritters & fried bites", "zh": "炸物", "es": "Buñuelos y frituras", "de": "Krapfen & Frittiertes", "ar": "المقليات"}, "Salades": {"en": "Salads", "zh": "沙拉", "es": "Ensaladas", "de": "Salate", "ar": "السلطات"}, "Volailles": {"en": "Poultry", "zh": "禽类", "es": "Aves", "de": "Geflügel", "ar": "الدواجن"}, "Porc & bœuf": {"en": "Pork & beef", "zh": "猪肉与牛肉", "es": "Cerdo y ternera", "de": "Schwein & Rind", "ar": "لحم الخنزير والبقر"}, "Poissons & crevettes": {"en": "Fish & prawns", "zh": "鱼与虾", "es": "Pescados y gambas", "de": "Fisch & Garnelen", "ar": "الأسماك والروبيان"}, "Spécialités du chef": {"en": "Chef's specials", "zh": "主厨招牌", "es": "Especialidades del chef", "de": "Spezialitäten des Küchenchefs", "ar": "أطباق الشيف"}, "Sur plaque chauffante": {"en": "On the hot plate", "zh": "铁板烧", "es": "A la plancha", "de": "Von der heißen Platte", "ar": "على الصاج الساخن"}, "Spécialités thaïlandaises": {"en": "Thai specialities", "zh": "泰式招牌", "es": "Especialidades tailandesas", "de": "Thailändische Spezialitäten", "ar": "أطباق تايلاندية مميّزة"}, "Soupes spéciales": {"en": "Special soups", "zh": "特色汤品", "es": "Sopas especiales", "de": "Spezialsuppen", "ar": "شوربات خاصة"}, "Bô bun maison": {"en": "House bò bún", "zh": "招牌牛肉米粉", "es": "Bò bún de la casa", "de": "Hausgemachtes Bò bún", "ar": "بو بون البيت"}, "Vermicelles de patates": {"en": "Glass noodles", "zh": "粉丝", "es": "Fideos de boniato", "de": "Glasnudeln", "ar": "شعيرية"}, "Accompagnements": {"en": "Sides", "zh": "配菜", "es": "Guarniciones", "de": "Beilagen", "ar": "أطباق جانبية"}, "Plats végétariens": {"en": "Vegetarian dishes", "zh": "素食菜肴", "es": "Platos vegetarianos", "de": "Vegetarische Gerichte", "ar": "أطباق نباتية"}, "Fondue & barbecue": {"en": "Fondue & barbecue", "zh": "火锅与烧烤", "es": "Fondue y barbacoa", "de": "Fondue & Barbecue", "ar": "الفوندو والشواء"}, "Glaces & sorbets": {"en": "Ice cream & sorbets", "zh": "冰淇淋与雪芭", "es": "Helados y sorbetes", "de": "Eis & Sorbets", "ar": "المثلجات والسوربيه"}, "Desserts maison": {"en": "Homemade desserts", "zh": "自制甜点", "es": "Postres caseros", "de": "Hausgemachte Desserts", "ar": "حلويات البيت"}, "Apéritifs": {"en": "Aperitifs", "zh": "餐前酒", "es": "Aperitivos", "de": "Aperitifs", "ar": "مشروبات فاتحة للشهية"}, "Bières & boissons": {"en": "Beers & soft drinks", "zh": "啤酒与饮料", "es": "Cervezas y bebidas", "de": "Biere & Getränke", "ar": "البيرة والمشروبات"}, "Vins en pichet — Roucas (rosé, rouge, blanc)": {"en": "Wine by the jug — Roucas (rosé, red, white)", "zh": "壶装葡萄酒 — Roucas（桃红、红、白）", "es": "Vino en jarra — Roucas (rosado, tinto, blanco)", "de": "Offener Wein — Roucas (Rosé, Rot, Weiß)", "ar": "نبيذ بالإبريق — روكاس (وردي، أحمر، أبيض)"}, "Vins rosés": {"en": "Rosé wines", "zh": "桃红葡萄酒", "es": "Vinos rosados", "de": "Roséweine", "ar": "نبيذ وردي"}, "Vins rouges": {"en": "Red wines", "zh": "红葡萄酒", "es": "Vinos tintos", "de": "Rotweine", "ar": "نبيذ أحمر"}, "Vins blancs & champagne": {"en": "White wines & champagne", "zh": "白葡萄酒与香槟", "es": "Vinos blancos y champán", "de": "Weißweine & Champagner", "ar": "نبيذ أبيض وشمبانيا"}, "Digestifs": {"en": "Digestifs", "zh": "餐后酒", "es": "Digestivos", "de": "Digestifs", "ar": "مشروبات هاضمة"}, "accompagnement non inclus": {"en": "side not included", "zh": "不含配菜", "es": "guarnición no incluida", "de": "Beilage nicht inbegriffen", "ar": "بدون طبق جانبي"}, "à partager": {"en": "to share", "zh": "适合分享", "es": "para compartir", "de": "zum Teilen", "ar": "للمشاركة"}, "Menu": {"en": "Set menu", "zh": "套餐", "es": "Menú", "de": "Menü", "ar": "قائمة"}, "Menu thaï": {"en": "Thai set menu", "zh": "泰式套餐", "es": "Menú tailandés", "de": "Thai-Menü", "ar": "قائمة تايلاندية"}, "Menu signature": {"en": "Signature set menu", "zh": "招牌套餐", "es": "Menú de autor", "de": "Signature-Menü", "ar": "قائمة مميّزة"}, "Spécial Maison": {"en": "House Special", "zh": "本店特选", "es": "Especial de la Casa", "de": "Haus-Spezial", "ar": "خاص بالبيت"}, "Entrée au choix": {"en": "Starter of your choice", "zh": "前菜任选", "es": "Entrante a elegir", "de": "Vorspeise nach Wahl", "ar": "مقبّلات حسب الاختيار"}, "Plat au choix": {"en": "Main of your choice", "zh": "主菜任选", "es": "Plato a elegir", "de": "Hauptgericht nach Wahl", "ar": "طبق رئيسي حسب الاختيار"}, "Accompagnement au choix": {"en": "Side of your choice", "zh": "配菜任选", "es": "Guarnición a elegir", "de": "Beilage nach Wahl", "ar": "طبق جانبي حسب الاختيار"}, "Dessert au choix": {"en": "Dessert of your choice", "zh": "甜点任选", "es": "Postre a elegir", "de": "Dessert nach Wahl", "ar": "حلوى حسب الاختيار"}, "Spécialité maison": {"en": "House speciality", "zh": "本店招牌", "es": "Especialidad de la casa", "de": "Hausspezialität", "ar": "اختصاص البيت"}, "Piquant": {"en": "Spicy", "zh": "辣", "es": "Picante", "de": "Scharf", "ar": "حار"}, "Très piquant": {"en": "Very spicy", "zh": "很辣", "es": "Muy picante", "de": "Sehr scharf", "ar": "حار جداً"}, "Raviolis aux crevettes à la vapeur (Ha-Kao)": {"en": "Steamed shrimp dumplings (Har Gow)", "zh": "虾饺 (Ha-Kao)", "es": "Empanadillas de gambas al vapor (Har Gow)", "de": "Gedämpfte Garnelen-Dumplings (Har Gow)", "ar": "دمبلنغ الروبيان بالبخار (ها كاو)"}, "Petits croissants à la vapeur (Fan-Koa)": {"en": "Steamed pork & shrimp buns (Fan Guo)", "zh": "潮州粉粿 (Fan-Koa)", "es": "Empanadillas al vapor (Fan Guo)", "de": "Gedämpfte Teigtaschen (Fan Guo)", "ar": "فطائر مطهوة بالبخار (فان كوا)"}, "Bouchées au porc (Xiu-Mai)": {"en": "Pork dumplings (Siu Mai)", "zh": "烧卖 (Xiu-Mai)", "es": "Bocados de cerdo (Siu Mai)", "de": "Schweinefleisch-Häppchen (Siu Mai)", "ar": "لقيمات لحم الخنزير (شيو ماي)"}, "Bouchées aux crevettes (Ha-Xiu-Mai)": {"en": "Shrimp dumplings (Har Siu Mai)", "zh": "虾烧卖 (Ha-Xiu-Mai)", "es": "Bocados de gambas (Har Siu Mai)", "de": "Garnelen-Häppchen (Har Siu Mai)", "ar": "لقيمات الروبيان (ها شيو ماي)"}, "Crêpes de riz à la vietnamienne": {"en": "Vietnamese steamed rice rolls", "zh": "越式肠粉", "es": "Crepes de arroz a la vietnamita", "de": "Vietnamesische Reisrollen", "ar": "لفائف الأرز الفيتنامية"}, "Délices variés à la vapeur": {"en": "Assorted steamed dim sum", "zh": "什锦蒸点", "es": "Surtido de dim sum al vapor", "de": "Gemischte gedämpfte Dim Sum", "ar": "تشكيلة ديم سم بالبخار"}, "Raviolis pékinois grillés (Guo-Tié)": {"en": "Pan-fried Peking dumplings (Guo Tie)", "zh": "锅贴 (Guo-Tié)", "es": "Empanadillas de Pekín a la plancha (Guo Tie)", "de": "Gebratene Peking-Teigtaschen (Guo Tie)", "ar": "دمبلنغ بكين المقلي (غوو تييه)"}, "Raviolis grillés au poulet": {"en": "Pan-fried chicken dumplings", "zh": "香煎鸡肉锅贴", "es": "Empanadillas de pollo a la plancha", "de": "Gebratene Hähnchen-Teigtaschen", "ar": "دمبلنغ الدجاج المقلي"}, "Potage thaï aux crevettes & citronnelle (poulet)": {"en": "Thai shrimp & lemongrass soup (or chicken)", "zh": "泰式香茅虾汤（或鸡肉）", "es": "Sopa tailandesa de gambas y citronela (o pollo)", "de": "Thai-Suppe mit Garnelen & Zitronengras (oder Hähnchen)", "ar": "شوربة تايلاندية بالروبيان والليمون العشبي (أو الدجاج)"}, "Potage pékinois piquant": {"en": "Spicy Peking hot & sour soup", "zh": "北京酸辣汤", "es": "Sopa picante de Pekín", "de": "Scharfe Peking-Suppe", "ar": "شوربة بكين الحارة"}, "Soupe de raviolis aux crevettes (Wun-Tun)": {"en": "Shrimp wonton soup", "zh": "鲜虾云吞汤 (Wun-Tun)", "es": "Sopa de wonton de gambas", "de": "Wan-Tan-Suppe mit Garnelen", "ar": "شوربة ونتون بالروبيان"}, "Soupe de poulet aux vermicelles transparents": {"en": "Chicken soup with glass noodles", "zh": "鸡肉粉丝汤", "es": "Sopa de pollo con fideos transparentes", "de": "Hühnersuppe mit Glasnudeln", "ar": "شوربة الدجاج بالشعيرية الزجاجية"}, "Beignet de crevettes": {"en": "Shrimp fritters", "zh": "炸虾", "es": "Buñuelos de gambas", "de": "Garnelen-Krapfen", "ar": "عجينة الروبيان المقلية"}, "Frites aux lamelles de légumes variés": {"en": "Assorted vegetable fries", "zh": "什锦蔬菜条", "es": "Tiras de verduras fritas", "de": "Gemüsestreifen frittiert", "ar": "شرائح خضار مقلية"}, "Raviolis aux crevettes frits": {"en": "Fried shrimp dumplings", "zh": "炸虾饺", "es": "Empanadillas de gambas fritas", "de": "Frittierte Garnelen-Teigtaschen", "ar": "دمبلنغ الروبيان المقلي"}, "Plateau du bonheur varié (chaud)": {"en": "Assorted hot platter", "zh": "什锦欢乐拼盘（热）", "es": "Plato variado caliente", "de": "Gemischte warme Platte", "ar": "طبق السعادة المشكّل (ساخن)"}, "Nêms au porc / poulet / végétariens": {"en": "Spring rolls — pork / chicken / vegetarian", "zh": "炸春卷 — 猪肉 / 鸡肉 / 素", "es": "Rollitos — cerdo / pollo / vegetariano", "de": "Frühlingsrollen — Schwein / Hähnchen / vegetarisch", "ar": "نمس — لحم خنزير / دجاج / نباتي"}, "Nêms aux crevettes": {"en": "Shrimp spring rolls", "zh": "鲜虾春卷", "es": "Rollitos de gambas", "de": "Garnelen-Frühlingsrollen", "ar": "نمس بالروبيان"}, "Omelette aux crevettes ou aux légumes": {"en": "Shrimp or vegetable omelette", "zh": "虾仁或蔬菜煎蛋", "es": "Tortilla de gambas o de verduras", "de": "Omelett mit Garnelen oder Gemüse", "ar": "عجة بالروبيان أو الخضار"}, "Rouleau de printemps aux crevettes": {"en": "Fresh shrimp spring roll", "zh": "鲜虾春卷（越式）", "es": "Rollito fresco de gambas", "de": "Frische Garnelen-Sommerrolle", "ar": "لفائف الربيع بالروبيان"}, "Salade thaï pimentée aux crevettes ou au bœuf": {"en": "Spicy Thai salad with shrimp or beef", "zh": "泰式辣沙拉（虾或牛肉）", "es": "Ensalada tailandesa picante con gambas o ternera", "de": "Scharfer Thai-Salat mit Garnelen oder Rind", "ar": "سلطة تايلاندية حارة بالروبيان أو اللحم"}, "Salade aux crevettes": {"en": "Shrimp salad", "zh": "鲜虾沙拉", "es": "Ensalada de gambas", "de": "Garnelensalat", "ar": "سلطة الروبيان"}, "Salade au poulet": {"en": "Chicken salad", "zh": "鸡肉沙拉", "es": "Ensalada de pollo", "de": "Hähnchensalat", "ar": "سلطة الدجاج"}, "Poulet aux champignons noirs": {"en": "Chicken with black mushrooms", "zh": "冬菇鸡", "es": "Pollo con setas negras", "de": "Hähnchen mit schwarzen Pilzen", "ar": "دجاج بالفطر الأسود"}, "Poulet au curry": {"en": "Chicken curry", "zh": "咖喱鸡", "es": "Pollo al curry", "de": "Hähnchen-Curry", "ar": "دجاج بالكاري"}, "Poulet aux noix de cajou": {"en": "Chicken with cashew nuts", "zh": "腰果鸡丁", "es": "Pollo con anacardos", "de": "Hähnchen mit Cashewkernen", "ar": "دجاج بالكاجو"}, "Poulet à la sauce piquante": {"en": "Chicken in spicy sauce", "zh": "辣味鸡", "es": "Pollo en salsa picante", "de": "Hähnchen in scharfer Sauce", "ar": "دجاج بالصلصة الحارة"}, "Porc à la sauce caramel": {"en": "Pork in caramel sauce", "zh": "红烧肉", "es": "Cerdo en salsa de caramelo", "de": "Schwein in Karamellsauce", "ar": "لحم خنزير بصلصة الكراميل"}, "Bœuf aux oignons": {"en": "Beef with onions", "zh": "洋葱牛肉", "es": "Ternera con cebolla", "de": "Rind mit Zwiebeln", "ar": "لحم بالبصل"}, "Bœuf à la sauce piquante": {"en": "Beef in spicy sauce", "zh": "辣味牛肉", "es": "Ternera en salsa picante", "de": "Rind in scharfer Sauce", "ar": "لحم بالصلصة الحارة"}, "Bœuf sauté au saté": {"en": "Beef sautéed with satay sauce", "zh": "沙爹牛肉", "es": "Ternera salteada al satay", "de": "Rind mit Satay-Sauce", "ar": "لحم مقلي بصلصة الساتيه"}, "Filet de cabillaud à la sauce piquante": {"en": "Cod fillet in spicy sauce", "zh": "辣味鳕鱼柳", "es": "Filete de bacalao en salsa picante", "de": "Kabeljaufilet in scharfer Sauce", "ar": "فيليه القد بالصلصة الحارة"}, "Filet de cabillaud au gingembre et à la ciboulette": {"en": "Cod fillet with ginger & chives", "zh": "姜葱鳕鱼柳", "es": "Filete de bacalao con jengibre y cebollino", "de": "Kabeljaufilet mit Ingwer & Schnittlauch", "ar": "فيليه القد بالزنجبيل والثوم المعمّر"}, "Crevettes à la sauce aigre-douce": {"en": "Sweet & sour prawns", "zh": "糖醋虾", "es": "Gambas agridulces", "de": "Süß-saure Garnelen", "ar": "روبيان بالصلصة الحلوة والحامضة"}, "Crevettes sautées à la sauce piquante": {"en": "Stir-fried prawns in spicy sauce", "zh": "辣炒虾", "es": "Gambas salteadas en salsa picante", "de": "Gebratene Garnelen in scharfer Sauce", "ar": "روبيان مقلي بالصلصة الحارة"}, "Canard laqué spécial": {"en": "Special Peking duck", "zh": "特色北京烤鸭", "es": "Pato laqueado especial", "de": "Spezielle Peking-Ente", "ar": "بطّ بكين الخاص"}, "Canard laqué avec sauce maison": {"en": "Peking duck with house sauce", "zh": "招牌酱烤鸭", "es": "Pato laqueado con salsa de la casa", "de": "Peking-Ente mit Haussauce", "ar": "بطّ مشوي بصلصة البيت"}, "Canard aux cinq parfums": {"en": "Five-spice duck", "zh": "五香鸭", "es": "Pato a las cinco especias", "de": "Fünf-Gewürze-Ente", "ar": "بطّ بالتوابل الخمس"}, "Travers de porc au sel et au poivre": {"en": "Salt & pepper pork ribs", "zh": "椒盐排骨", "es": "Costillas de cerdo a la sal y pimienta", "de": "Schweinerippchen mit Salz & Pfeffer", "ar": "أضلاع الخنزير بالملح والفلفل"}, "Poulet au citron": {"en": "Lemon chicken", "zh": "柠檬鸡", "es": "Pollo al limón", "de": "Zitronenhähnchen", "ar": "دجاج بالليمون"}, "Poulet au sel et au poivre": {"en": "Salt & pepper chicken", "zh": "椒盐鸡", "es": "Pollo a la sal y pimienta", "de": "Salz-Pfeffer-Hähnchen", "ar": "دجاج بالملح والفلفل"}, "Grosses crevettes sautées au sel et au poivre": {"en": "Salt & pepper king prawns", "zh": "椒盐大虾", "es": "Langostinos a la sal y pimienta", "de": "Riesengarnelen mit Salz & Pfeffer", "ar": "روبيان كبير بالملح والفلفل"}, "Crevettes sautées à l'ail": {"en": "Garlic prawns", "zh": "蒜蓉虾", "es": "Gambas al ajillo", "de": "Knoblauchgarnelen", "ar": "روبيان بالثوم"}, "Coquilles St-Jacques sautées à l'ail": {"en": "Garlic scallops", "zh": "蒜蓉带子", "es": "Vieiras al ajillo", "de": "Jakobsmuscheln mit Knoblauch", "ar": "اسكالوب بالثوم"}, "Coquilles St-Jacques au gingembre et à la ciboulette": {"en": "Scallops with ginger & chives", "zh": "姜葱带子", "es": "Vieiras con jengibre y cebollino", "de": "Jakobsmuscheln mit Ingwer & Schnittlauch", "ar": "اسكالوب بالزنجبيل والثوم المعمّر"}, "Coquilles St-Jacques sautées à la sauce piquante": {"en": "Scallops in spicy sauce", "zh": "辣味带子", "es": "Vieiras en salsa picante", "de": "Jakobsmuscheln in scharfer Sauce", "ar": "اسكالوب بالصلصة الحارة"}, "Cuisses de grenouille sautées au sel et poivre": {"en": "Salt & pepper frogs' legs", "zh": "椒盐田鸡腿", "es": "Ancas de rana a la sal y pimienta", "de": "Froschschenkel mit Salz & Pfeffer", "ar": "أرجل الضفادع بالملح والفلفل"}, "Calamar sauté au sel et au poivre": {"en": "Salt & pepper squid", "zh": "椒盐鱿鱼", "es": "Calamar a la sal y pimienta", "de": "Tintenfisch mit Salz & Pfeffer", "ar": "كاليماري بالملح والفلفل"}, "Poulet croustillant du chef": {"en": "Chef's crispy chicken", "zh": "主厨脆皮鸡", "es": "Pollo crujiente del chef", "de": "Knuspriges Hähnchen des Küchenchefs", "ar": "دجاج الشيف المقرمش"}, "Marmite de fruits de mer à la thaïlandaise": {"en": "Thai seafood hotpot", "zh": "泰式海鲜煲", "es": "Cazuela de marisco a la tailandesa", "de": "Thai-Meeresfrüchte-Topf", "ar": "طاجن المأكولات البحرية التايلاندي"}, "Poulet à l'ananas frais": {"en": "Chicken with fresh pineapple", "zh": "鲜菠萝鸡", "es": "Pollo con piña fresca", "de": "Hähnchen mit frischer Ananas", "ar": "دجاج بالأناناس الطازج"}, "Bar à la vapeur": {"en": "Steamed sea bass", "zh": "清蒸鲈鱼", "es": "Lubina al vapor", "de": "Gedämpfter Wolfsbarsch", "ar": "قاروص بالبخار"}, "Sole grillée ou à la vapeur": {"en": "Grilled or steamed sole", "zh": "香煎或清蒸龙利", "es": "Lenguado a la plancha o al vapor", "de": "Seezunge gegrillt oder gedämpft", "ar": "سمك موسى مشوي أو بالبخار"}, "Poulet sauté au poivre noir": {"en": "Black pepper chicken", "zh": "黑椒鸡", "es": "Pollo a la pimienta negra", "de": "Hähnchen mit schwarzem Pfeffer", "ar": "دجاج بالفلفل الأسود"}, "Bœuf sauté au poivre noir": {"en": "Black pepper beef", "zh": "黑椒牛肉", "es": "Ternera a la pimienta negra", "de": "Rind mit schwarzem Pfeffer", "ar": "لحم بالفلفل الأسود"}, "Canard sauté au poivre noir": {"en": "Black pepper duck", "zh": "黑椒鸭", "es": "Pato a la pimienta negra", "de": "Ente mit schwarzem Pfeffer", "ar": "بطّ بالفلفل الأسود"}, "Grosses crevettes à la sauce piquante": {"en": "King prawns in spicy sauce", "zh": "辣味大虾", "es": "Langostinos en salsa picante", "de": "Riesengarnelen in scharfer Sauce", "ar": "روبيان كبير بالصلصة الحارة"}, "Crevettes sautées nature ou au saté": {"en": "Prawns, plain or with satay", "zh": "原味或沙爹炒虾", "es": "Gambas al natural o al satay", "de": "Garnelen natur oder Satay", "ar": "روبيان عادي أو بالساتيه"}, "Coquilles St-Jacques sautées nature": {"en": "Plain sautéed scallops", "zh": "原味炒带子", "es": "Vieiras salteadas al natural", "de": "Jakobsmuscheln natur", "ar": "اسكالوب عادي"}, "Coquilles St-Jacques sautées à la thaïlandaise": {"en": "Thai-style scallops", "zh": "泰式炒带子", "es": "Vieiras a la tailandesa", "de": "Jakobsmuscheln auf Thai-Art", "ar": "اسكالوب على الطريقة التايلاندية"}, "Poulet sauté à la thaïlandaise": {"en": "Thai-style chicken", "zh": "泰式炒鸡", "es": "Pollo a la tailandesa", "de": "Hähnchen auf Thai-Art", "ar": "دجاج على الطريقة التايلاندية"}, "Bœuf sauté à la thaïlandaise": {"en": "Thai-style beef", "zh": "泰式炒牛肉", "es": "Ternera a la tailandesa", "de": "Rind auf Thai-Art", "ar": "لحم على الطريقة التايلاندية"}, "Poisson sauté à la thaïlandaise": {"en": "Thai-style fish", "zh": "泰式炒鱼", "es": "Pescado a la tailandesa", "de": "Fisch auf Thai-Art", "ar": "سمك على الطريقة التايلاندية"}, "Calamar sauté à la thaïlandaise": {"en": "Thai-style squid", "zh": "泰式炒鱿鱼", "es": "Calamar a la tailandesa", "de": "Tintenfisch auf Thai-Art", "ar": "كاليماري على الطريقة التايلاندية"}, "Cuisses de grenouille sautées à la thaïlandaise": {"en": "Thai-style frogs' legs", "zh": "泰式炒田鸡腿", "es": "Ancas de rana a la tailandesa", "de": "Froschschenkel auf Thai-Art", "ar": "أرجل الضفادع على الطريقة التايلاندية"}, "Crevettes sautées à la thaïlandaise": {"en": "Thai-style prawns", "zh": "泰式炒虾", "es": "Gambas a la tailandesa", "de": "Garnelen auf Thai-Art", "ar": "روبيان على الطريقة التايلاندية"}, "Soupe de udon au canard ou aux crevettes": {"en": "Udon soup with duck or prawns", "zh": "鸭肉或鲜虾乌冬汤", "es": "Sopa de udon con pato o gambas", "de": "Udon-Suppe mit Ente oder Garnelen", "ar": "شوربة أودون بالبطّ أو الروبيان"}, "Soupe de nouilles au canard": {"en": "Duck noodle soup", "zh": "鸭肉汤面", "es": "Sopa de fideos con pato", "de": "Nudelsuppe mit Ente", "ar": "شوربة المعكرونة بالبطّ"}, "Bô bun au bœuf": {"en": "Beef bò bún (vermicelli bowl)", "zh": "牛肉米粉 (Bò bún)", "es": "Bò bún de ternera", "de": "Bò bún mit Rind", "ar": "بو بون باللحم"}, "Bô bun au poulet": {"en": "Chicken bò bún (vermicelli bowl)", "zh": "鸡肉米粉 (Bò bún)", "es": "Bò bún de pollo", "de": "Bò bún mit Hähnchen", "ar": "بو بون بالدجاج"}, "Bô bun aux crevettes": {"en": "Prawn bò bún (vermicelli bowl)", "zh": "鲜虾米粉 (Bò bún)", "es": "Bò bún de gambas", "de": "Bò bún mit Garnelen", "ar": "بو بون بالروبيان"}, "Vermicelles de patates sautées aux crevettes / bœuf / poulet": {"en": "Stir-fried glass noodles — prawn / beef / chicken", "zh": "炒粉丝 — 虾 / 牛 / 鸡", "es": "Fideos de boniato salteados — gambas / ternera / pollo", "de": "Gebratene Glasnudeln — Garnele / Rind / Hähnchen", "ar": "شعيرية مقلية — روبيان / لحم / دجاج"}, "Riz nature": {"en": "Plain rice", "zh": "白饭", "es": "Arroz blanco", "de": "Reis natur", "ar": "أرز سادة"}, "Riz gluant": {"en": "Sticky rice", "zh": "糯米饭", "es": "Arroz glutinoso", "de": "Klebreis", "ar": "أرز لزج"}, "Riz cantonnais": {"en": "Cantonese fried rice", "zh": "扬州炒饭", "es": "Arroz tres delicias", "de": "Kantonesischer Bratreis", "ar": "أرز كانتوني مقلي"}, "Riz sauté au curry avec poulet": {"en": "Curry fried rice with chicken", "zh": "咖喱鸡炒饭", "es": "Arroz frito al curry con pollo", "de": "Curry-Bratreis mit Hähnchen", "ar": "أرز مقلي بالكاري والدجاج"}, "Riz sauté aux crevettes": {"en": "Prawn fried rice", "zh": "虾仁炒饭", "es": "Arroz frito con gambas", "de": "Bratreis mit Garnelen", "ar": "أرز مقلي بالروبيان"}, "Riz sauté à la thaïlandaise": {"en": "Thai fried rice", "zh": "泰式炒饭", "es": "Arroz frito a la tailandesa", "de": "Thai-Bratreis", "ar": "أرز مقلي تايلاندي"}, "Nouilles sautées nature": {"en": "Plain fried noodles", "zh": "素炒面", "es": "Fideos salteados al natural", "de": "Gebratene Nudeln natur", "ar": "معكرونة مقلية سادة"}, "Nouilles sautées aux crevettes / bœuf / poulet / porc": {"en": "Fried noodles — prawn / beef / chicken / pork", "zh": "炒面 — 虾 / 牛 / 鸡 / 猪", "es": "Fideos salteados — gambas / ternera / pollo / cerdo", "de": "Gebratene Nudeln — Garnele / Rind / Hähnchen / Schwein", "ar": "معكرونة مقلية — روبيان / لحم / دجاج / خنزير"}, "Brocolis sautés nature": {"en": "Plain sautéed broccoli", "zh": "清炒西兰花", "es": "Brócoli salteado", "de": "Gebratener Brokkoli", "ar": "بروكلي مقلي"}, "Champignons noirs sautés nature": {"en": "Plain sautéed black mushrooms", "zh": "清炒冬菇", "es": "Setas negras salteadas", "de": "Gebratene schwarze Pilze", "ar": "فطر أسود مقلي"}, "Choux chinois sautés": {"en": "Sautéed Chinese cabbage", "zh": "清炒大白菜", "es": "Col china salteada", "de": "Gebratener Chinakohl", "ar": "ملفوف صيني مقلي"}, "Légumes chop-suey": {"en": "Chop suey vegetables", "zh": "杂碎蔬菜", "es": "Verduras chop suey", "de": "Chop-Suey-Gemüse", "ar": "خضار تشوب سوي"}, "Nêms végétariens": {"en": "Vegetarian spring rolls", "zh": "素春卷", "es": "Rollitos vegetarianos", "de": "Vegetarische Frühlingsrollen", "ar": "نمس نباتي"}, "Rouleaux de printemps végétariens": {"en": "Vegetarian fresh spring rolls", "zh": "素鲜春卷", "es": "Rollitos frescos vegetarianos", "de": "Vegetarische Sommerrollen", "ar": "لفائف الربيع النباتية"}, "Bô bun végétarien": {"en": "Vegetarian bò bún", "zh": "素米粉 (Bò bún)", "es": "Bò bún vegetariano", "de": "Vegetarisches Bò bún", "ar": "بو بون نباتي"}, "Riz sauté végétarien": {"en": "Vegetarian fried rice", "zh": "素炒饭", "es": "Arroz frito vegetariano", "de": "Vegetarischer Bratreis", "ar": "أرز مقلي نباتي"}, "Fondue chinoise": {"en": "Chinese fondue (hotpot)", "zh": "中式火锅", "es": "Fondue china", "de": "Chinesisches Fondue", "ar": "فوندو صيني (هوت بوت)"}, "Barbecue au bœuf": {"en": "Beef barbecue", "zh": "烤牛肉", "es": "Barbacoa de ternera", "de": "Rind-Barbecue", "ar": "شواء اللحم"}, "Sorbet au choix — 3 boules": {"en": "Sorbet of your choice — 3 scoops", "zh": "自选雪芭 — 3 球", "es": "Sorbete a elegir — 3 bolas", "de": "Sorbet nach Wahl — 3 Kugeln", "ar": "سوربيه حسب الاختيار — 3 كرات"}, "Sorbet au choix — 2 boules": {"en": "Sorbet of your choice — 2 scoops", "zh": "自选雪芭 — 2 球", "es": "Sorbete a elegir — 2 bolas", "de": "Sorbet nach Wahl — 2 Kugeln", "ar": "سوربيه حسب الاختيار — كرتان"}, "Sorbet au choix — 1 boule": {"en": "Sorbet of your choice — 1 scoop", "zh": "自选雪芭 — 1 球", "es": "Sorbete a elegir — 1 bola", "de": "Sorbet nach Wahl — 1 Kugel", "ar": "سوربيه حسب الاختيار — كرة واحدة"}, "Orange givrée": {"en": "Frozen orange sorbet", "zh": "香橙冰沙", "es": "Naranja helada", "de": "Gefrorene Orange", "ar": "برتقالة مثلّجة"}, "Citron givré": {"en": "Frozen lemon sorbet", "zh": "柠檬冰沙", "es": "Limón helado", "de": "Gefrorene Zitrone", "ar": "ليمونة مثلّجة"}, "Coco givrée": {"en": "Frozen coconut sorbet", "zh": "椰子冰沙", "es": "Coco helado", "de": "Gefrorene Kokosnuss", "ar": "جوز هند مثلّج"}, "Mystère vanille": {"en": "Vanilla Mystère (ice cream & meringue)", "zh": "香草蛋白冰淇淋", "es": "Mystère de vainilla", "de": "Vanille-Mystère", "ar": "ميستير بالفانيليا"}, "Nougat glacé": {"en": "Frozen nougat", "zh": "冰镇牛轧糖", "es": "Turrón helado", "de": "Eis-Nougat", "ar": "نوغة مثلّجة"}, "Parfait caramel": {"en": "Caramel parfait", "zh": "焦糖芭菲", "es": "Parfait de caramelo", "de": "Karamell-Parfait", "ar": "بارفيه الكراميل"}, "Perle de coco": {"en": "Coconut pearl (sticky rice ball)", "zh": "椰丝糯米糍", "es": "Perla de coco", "de": "Kokos-Perle", "ar": "لؤلؤة جوز الهند"}, "Lychees au sirop": {"en": "Lychees in syrup", "zh": "糖水荔枝", "es": "Lichis en almíbar", "de": "Litschis in Sirup", "ar": "ليتشي بالشراب"}, "Nougat chinois": {"en": "Chinese nougat", "zh": "中式牛轧糖", "es": "Turrón chino", "de": "Chinesischer Nougat", "ar": "نوغة صينية"}, "Demi-mangue fraîche": {"en": "Fresh half mango", "zh": "半个鲜芒果", "es": "Medio mango fresco", "de": "Halbe frische Mango", "ar": "نصف مانجو طازجة"}, "Ananas frais": {"en": "Fresh pineapple", "zh": "鲜菠萝", "es": "Piña fresca", "de": "Frische Ananas", "ar": "أناناس طازج"}, "Gingembre confit": {"en": "Candied ginger", "zh": "糖姜", "es": "Jengibre confitado", "de": "Kandierter Ingwer", "ar": "زنجبيل مسكّر"}, "Dôme blanche": {"en": "White dome (ice cream dessert)", "zh": "白色冰淇淋圆顶", "es": "Cúpula blanca", "de": "Weiße Eiskuppel", "ar": "قبة بيضاء"}, "Délice menthe": {"en": "Mint delight", "zh": "薄荷雪糕", "es": "Delicia de menta", "de": "Minz-Genuss", "ar": "لذة النعناع"}, "Beignet de pomme (banane, ananas)": {"en": "Apple fritter (banana, pineapple)", "zh": "炸苹果（香蕉、菠萝）", "es": "Buñuelo de manzana (plátano, piña)", "de": "Apfel-Krapfen (Banane, Ananas)", "ar": "عجينة التفاح المقلية (موز، أناناس)"}, "Beignet flambé au rhum ou au Meikwei lu": {"en": "Fritter flambéed with rum or Meikwei lu", "zh": "火焰炸饼（朗姆或玫瑰露）", "es": "Buñuelo flambeado al ron o Meikwei lu", "de": "Flambierter Krapfen mit Rum oder Meikwei lu", "ar": "عجينة مقلية ملتهبة بالرَّم أو الميكوي لو"}, "Coupe colonel": {"en": "Colonel (lemon sorbet & vodka)", "zh": "上校杯（柠檬雪芭加伏特加）", "es": "Copa Colonel (sorbete de limón y vodka)", "de": "Colonel (Zitronensorbet & Wodka)", "ar": "كوب الكولونيل (سوربيه ليمون وفودكا)"}, "Chocolat liégeois": {"en": "Chocolate sundae (liégeois)", "zh": "列日巧克力冰淇淋", "es": "Chocolate liégeois", "de": "Schoko-Eisbecher (Liégeois)", "ar": "شوكولاتة ليجوا (آيس كريم)"}, "Cocktail maison (12cl)": {"en": "House cocktail (12cl)", "zh": "招牌鸡尾酒 (12cl)", "es": "Cóctel de la casa (12cl)", "de": "Hauscocktail (12cl)", "ar": "كوكتيل البيت (12cl)"}, "Cocktail maison sans alcool (12cl)": {"en": "Non-alcoholic house cocktail (12cl)", "zh": "无酒精招牌鸡尾酒 (12cl)", "es": "Cóctel sin alcohol de la casa (12cl)", "de": "Alkoholfreier Hauscocktail (12cl)", "ar": "كوكتيل البيت بدون كحول (12cl)"}, "Bière 33cl — Tsingtao, Heineken, Carlsberg, Singha": {"en": "Beer 33cl — Tsingtao, Heineken, Carlsberg, Singha", "zh": "啤酒 33cl — 青岛、喜力、嘉士伯、胜狮", "es": "Cerveza 33cl — Tsingtao, Heineken, Carlsberg, Singha", "de": "Bier 33cl — Tsingtao, Heineken, Carlsberg, Singha", "ar": "بيرة 33cl — تسينغتاو، هاينكن، كارلسبرغ، سينغها"}, "Jus de coco (25cl)": {"en": "Coconut juice (25cl)", "zh": "椰子汁 (25cl)", "es": "Zumo de coco (25cl)", "de": "Kokossaft (25cl)", "ar": "عصير جوز الهند (25cl)"}, "Jus de fruits (orange, ananas, abricot)": {"en": "Fruit juice (orange, pineapple, apricot)", "zh": "果汁（橙、菠萝、杏）", "es": "Zumo de frutas (naranja, piña, albaricoque)", "de": "Fruchtsaft (Orange, Ananas, Aprikose)", "ar": "عصير فواكه (برتقال، أناناس، مشمش)"}, "Lait de soja": {"en": "Soy milk", "zh": "豆浆", "es": "Leche de soja", "de": "Sojamilch", "ar": "حليب الصويا"}, "Thé vert, oolong, jasmin, menthe": {"en": "Green, oolong, jasmine or mint tea", "zh": "绿茶、乌龙、茉莉、薄荷茶", "es": "Té verde, oolong, jazmín o menta", "de": "Grüner, Oolong-, Jasmin- oder Minztee", "ar": "شاي أخضر، أولونغ، ياسمين، نعناع"}, "Café ou décaféiné": {"en": "Coffee or decaf", "zh": "咖啡或低因咖啡", "es": "Café o descafeinado", "de": "Kaffee oder entkoffeiniert", "ar": "قهوة أو منزوعة الكافيين"}, "Café crème": {"en": "Coffee with cream", "zh": "奶油咖啡", "es": "Café con crema", "de": "Milchkaffee", "ar": "قهوة بالكريمة"}, "Un verre": {"en": "A glass", "zh": "一杯", "es": "Una copa", "de": "Ein Glas", "ar": "كأس"}, "4 pièces": {"en": "4 pieces", "zh": "4 件", "es": "4 piezas", "de": "4 Stück", "ar": "4 قطع"}, "3 pièces": {"en": "3 pieces", "zh": "3 件", "es": "3 piezas", "de": "3 Stück", "ar": "3 قطع"}, "5 pièces": {"en": "5 pieces", "zh": "5 件", "es": "5 piezas", "de": "5 Stück", "ar": "5 قطع"}, "6 pièces": {"en": "6 pieces", "zh": "6 件", "es": "6 piezas", "de": "6 Stück", "ar": "6 قطع"}, "6 grandes pièces": {"en": "6 large pieces", "zh": "6 大件", "es": "6 piezas grandes", "de": "6 große Stück", "ar": "6 قطع كبيرة"}, "nêms, croissants farcis frits, croquettes de langoustine, beignets de crevettes · 1 pers.": {"en": "spring rolls, fried stuffed buns, langoustine croquettes, shrimp fritters · 1 pers.", "zh": "春卷、炸馅角、龙虾可乐饼、炸虾 · 1 人", "es": "rollitos, croissants rellenos fritos, croquetas de cigala, buñuelos de gambas · 1 pers.", "de": "Frühlingsrollen, frittierte gefüllte Hörnchen, Langustinen-Kroketten, Garnelen-Krapfen · 1 Pers.", "ar": "نمس، فطائر محشوة مقلية، كروكيت الكركند، عجينة الروبيان · لشخص واحد"}, "crêpes à enrouler soi-même, concombres, carottes & sauce": {"en": "pancakes to roll yourself, cucumber, carrots & sauce", "zh": "自卷薄饼、黄瓜、胡萝卜及酱料", "es": "crepes para enrollar, pepino, zanahoria y salsa", "de": "Pfannkuchen zum Selbstrollen, Gurke, Karotten & Sauce", "ar": "رقائق تُلَفّ بنفسك، خيار، جزر وصلصة"}, "légumes & vermicelles": {"en": "vegetables & glass noodles", "zh": "蔬菜与粉丝", "es": "verduras y fideos", "de": "Gemüse & Glasnudeln", "ar": "خضار وشعيرية"}, "ananas, crevette, basilic": {"en": "pineapple, shrimp, basil", "zh": "菠萝、虾、罗勒", "es": "piña, gamba, albahaca", "de": "Ananas, Garnele, Basilikum", "ar": "أناناس، روبيان، ريحان"}, "grande": {"en": "large", "zh": "大份", "es": "grande", "de": "groß", "ar": "كبيرة"}, "crevettes, seiches, noix de St-Jacques, bœuf, légumes & vermicelles": {"en": "prawns, cuttlefish, scallops, beef, vegetables & glass noodles", "zh": "虾、墨鱼、带子、牛肉、蔬菜与粉丝", "es": "gambas, sepia, vieiras, ternera, verduras y fideos", "de": "Garnelen, Tintenfisch, Jakobsmuscheln, Rind, Gemüse & Glasnudeln", "ar": "روبيان، حبّار، اسكالوب، لحم، خضار وشعيرية"}, "mangue, citron, fraise, café, chocolat, pistache, vanille": {"en": "mango, lemon, strawberry, coffee, chocolate, pistachio, vanilla", "zh": "芒果、柠檬、草莓、咖啡、巧克力、开心果、香草", "es": "mango, limón, fresa, café, chocolate, pistacho, vainilla", "de": "Mango, Zitrone, Erdbeere, Kaffee, Schokolade, Pistazie, Vanille", "ar": "مانجو، ليمون، فراولة، قهوة، شوكولاتة، فستق، فانيليا"}, "Bouchées aux crevettes à la vapeur": {"en": "Steamed shrimp dumplings", "zh": "蒸虾饺", "es": "Empanadillas de gambas al vapor", "de": "Gedämpfte Garnelen-Häppchen", "ar": "لقيمات الروبيان بالبخار"}, "Petits pâtés impériaux": {"en": "Imperial spring rolls", "zh": "炸春卷", "es": "Rollitos imperiales", "de": "Frühlingsrollen", "ar": "نمس إمبراطوري"}, "Rouleaux de printemps": {"en": "Fresh spring rolls", "zh": "鲜春卷", "es": "Rollitos de primavera", "de": "Sommerrollen", "ar": "لفائف الربيع"}, "Poulet à l'ananas": {"en": "Chicken with pineapple", "zh": "菠萝鸡", "es": "Pollo con piña", "de": "Hähnchen mit Ananas", "ar": "دجاج بالأناناس"}, "Filet de cabillaud, gingembre & ciboulette": {"en": "Cod fillet, ginger & chives", "zh": "姜葱鳕鱼柳", "es": "Filete de bacalao, jengibre y cebollino", "de": "Kabeljaufilet, Ingwer & Schnittlauch", "ar": "فيليه القد بالزنجبيل والثوم المعمّر"}, "Crevettes à la sauce piquante": {"en": "Prawns in spicy sauce", "zh": "辣味虾", "es": "Gambas en salsa picante", "de": "Garnelen in scharfer Sauce", "ar": "روبيان بالصلصة الحارة"}, "Champignon sauté nature": {"en": "Plain sautéed mushrooms", "zh": "清炒蘑菇", "es": "Champiñones salteados", "de": "Gebratene Pilze natur", "ar": "فطر مقلي سادة"}, "Légumes chop suey": {"en": "Chop suey vegetables", "zh": "杂碎蔬菜", "es": "Verduras chop suey", "de": "Chop-Suey-Gemüse", "ar": "خضار تشوب سوي"}, "Nougats chinois": {"en": "Chinese nougat", "zh": "中式牛轧糖", "es": "Turrón chino", "de": "Chinesischer Nougat", "ar": "نوغة صينية"}, "Gingembre": {"en": "Candied ginger", "zh": "糖姜", "es": "Jengibre confitado", "de": "Kandierter Ingwer", "ar": "زنجبيل مسكّر"}, "Beignets de banane": {"en": "Banana fritters", "zh": "炸香蕉", "es": "Buñuelos de plátano", "de": "Bananen-Krapfen", "ar": "عجينة الموز المقلية"}, "Beignets de pomme": {"en": "Apple fritters", "zh": "炸苹果", "es": "Buñuelos de manzana", "de": "Apfel-Krapfen", "ar": "عجينة التفاح المقلية"}, "Perles de coco": {"en": "Coconut pearls", "zh": "椰丝糯米糍", "es": "Perlas de coco", "de": "Kokos-Perlen", "ar": "لآلئ جوز الهند"}, "Glace au choix": {"en": "Ice cream of your choice", "zh": "自选冰淇淋", "es": "Helado a elegir", "de": "Eis nach Wahl", "ar": "آيس كريم حسب الاختيار"}, "Crevettes sautées au sel et au poivre": {"en": "Salt & pepper prawns", "zh": "椒盐虾", "es": "Gambas a la sal y pimienta", "de": "Garnelen mit Salz & Pfeffer", "ar": "روبيان بالملح والفلفل"}, "Bœuf sauté sur plaque chauffante": {"en": "Beef on the hot plate", "zh": "铁板牛肉", "es": "Ternera a la plancha", "de": "Rind von der heißen Platte", "ar": "لحم على الصاج الساخن"}, "Poulet caramel": {"en": "Caramel chicken", "zh": "焦糖鸡", "es": "Pollo al caramelo", "de": "Karamell-Hähnchen", "ar": "دجاج بالكراميل"}, "Raviolis aux crevettes à la vapeur": {"en": "Steamed shrimp dumplings", "zh": "蒸虾饺", "es": "Empanadillas de gambas al vapor", "de": "Gedämpfte Garnelen-Teigtaschen", "ar": "دمبلنغ الروبيان بالبخار"}, "Potage thaïlandais, crevettes & citronnelle": {"en": "Thai shrimp & lemongrass soup", "zh": "泰式香茅虾汤", "es": "Sopa tailandesa de gambas y citronela", "de": "Thai-Suppe mit Garnelen & Zitronengras", "ar": "شوربة تايلاندية بالروبيان والليمون العشبي"}, "Salade thaïlandaise pimentée au bœuf": {"en": "Spicy Thai beef salad", "zh": "泰式辣牛肉沙拉", "es": "Ensalada tailandesa picante de ternera", "de": "Scharfer Thai-Rindersalat", "ar": "سلطة تايلاندية حارة باللحم"}, "Canard laqué, sauce maison": {"en": "Peking duck, house sauce", "zh": "招牌酱烤鸭", "es": "Pato laqueado, salsa de la casa", "de": "Peking-Ente, Haussauce", "ar": "بطّ مشوي بصلصة البيت"}, "Poulet sauté au poivre noir sur plaque chauffante": {"en": "Black pepper chicken on the hot plate", "zh": "铁板黑椒鸡", "es": "Pollo a la pimienta negra a la plancha", "de": "Schwarzpfeffer-Hähnchen (heiße Platte)", "ar": "دجاج بالفلفل الأسود على الصاج"}, "Glace Mystère": {"en": "Mystère ice cream", "zh": "蛋白冰淇淋 (Mystère)", "es": "Helado Mystère", "de": "Mystère-Eis", "ar": "آيس كريم ميستير"}};
+function tr(s){ if (LANG === "fr" || s == null || s === "") return s; const e = MENU_T[s]; return (e && e[LANG] != null) ? e[LANG] : s; }
+loadMenu(); initForm(); initUI(); initI18n();
+</script>
+</body>
+</html>
