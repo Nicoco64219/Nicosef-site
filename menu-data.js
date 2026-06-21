@@ -518,71 +518,71 @@
           "code": "1",
           "name": "Raviolis aux crevettes à la vapeur (Ha-Kao)",
           "desc": "4 pièces",
-          "price": "4,90 €"
+          "price": "5,90 €"
         },
         {
           "code": "2",
           "name": "Petits croissants à la vapeur (Fan-Koa)",
           "desc": "4 pièces",
-          "price": "4,90 €"
+          "price": "5,90 €"
         },
         {
           "code": "3",
           "name": "Bouchées au porc (Xiu-Mai)",
           "desc": "4 pièces",
-          "price": "4,90 €"
+          "price": "5,90 €"
         },
         {
           "code": "4",
           "name": "Bouchées aux crevettes (Ha-Xiu-Mai)",
           "desc": "4 pièces",
-          "price": "4,90 €"
+          "price": "5,90 €"
         },
         {
           "code": "5",
           "name": "Crêpes de riz à la vietnamienne",
           "desc": "3 pièces",
-          "price": "5,90 €"
+          "price": "6,90 €"
         },
         {
           "code": "6",
           "name": "Délices variés à la vapeur",
           "desc": "5 pièces",
-          "price": "5,90 €"
+          "price": "6,90 €"
         },
         {
           "code": "7",
           "name": "Raviolis pékinois grillés (Guo-Tié)",
           "desc": "6 grandes pièces",
-          "price": "7,90 €"
+          "price": "8,90 €"
         },
         {
           "code": "8",
           "name": "Raviolis grillés au poulet",
           "desc": "6 pièces",
-          "price": "5,90 €"
+          "price": "6,90 €"
         },
         {
           "code": "9",
           "name": "Potage thaï aux crevettes & citronnelle (poulet)",
-          "price": "6,90 €",
+          "price": "8,90 €",
           "heat": 1
         },
         {
           "code": "11",
           "name": "Potage pékinois piquant",
-          "price": "5,90 €",
+          "price": "6,90 €",
           "heat": 1
         },
         {
           "code": "12",
           "name": "Soupe de raviolis aux crevettes (Wun-Tun)",
-          "price": "6,90 €"
+          "price": "7,90 €"
         },
         {
           "code": "13",
           "name": "Soupe de poulet aux vermicelles transparents",
-          "price": "4,90 €"
+          "price": "5,90 €"
         }
       ]
     },
@@ -594,46 +594,46 @@
           "code": "14",
           "name": "Beignet de crevettes",
           "desc": "6 pièces",
-          "price": "7,90 €"
+          "price": "8,90 €"
         },
         {
           "code": "15",
           "name": "Frites aux lamelles de légumes variés",
-          "price": "5,90 €",
+          "price": "6,90 €",
           "veg": true
         },
         {
           "code": "16",
           "name": "Raviolis aux crevettes frits",
-          "price": "5,90 €"
+          "price": "6,90 €"
         },
         {
           "code": "17",
           "name": "Plateau du bonheur varié (chaud)",
           "desc": "nêms, croissants farcis frits, croquettes de langoustine, beignets de crevettes · 1 pers.",
-          "price": "8,50 €"
+          "price": "10,90 €"
         },
         {
           "code": "18",
           "name": "Nêms au porc / poulet / végétariens",
           "desc": "4 pièces",
-          "price": "4,90 €"
+          "price": "5,90 €"
         },
         {
           "code": "19",
           "name": "Nêms aux crevettes",
           "desc": "5 pièces",
-          "price": "6,90 €"
+          "price": "7,90 €"
         },
         {
           "code": "20",
           "name": "Omelette aux crevettes ou aux légumes",
-          "price": "5,90 €"
+          "price": "6,90 €"
         },
         {
           "code": "21",
           "name": "Rouleau de printemps aux crevettes",
-          "price": "4,50 €"
+          "price": "5,90 €"
         }
       ]
     },
@@ -650,12 +650,12 @@
         {
           "code": "25",
           "name": "Salade aux crevettes",
-          "price": "5,90 €"
+          "price": "6,90 €"
         },
         {
           "code": "26",
           "name": "Salade au poulet",
-          "price": "5,50 €"
+          "price": "6,90 €"
         }
       ]
     },
@@ -751,45 +751,45 @@
           "code": "S1",
           "name": "Canard laqué spécial",
           "desc": "crêpes à enrouler soi-même, concombres, carottes & sauce",
-          "price": "14,90 €"
+          "price": "15,90 €"
         },
         {
           "code": "S2",
           "name": "Canard laqué avec sauce maison",
-          "price": "10,90 €"
+          "price": "11,90 €"
         },
         {
           "code": "S3",
           "name": "Canard aux cinq parfums",
-          "price": "10,90 €"
+          "price": "11,90 €"
         },
         {
           "code": "S4",
           "name": "Travers de porc au sel et au poivre",
-          "price": "10,90 €",
+          "price": "11,90 €",
           "heat": 1
         },
         {
           "code": "S5",
           "name": "Poulet au citron",
-          "price": "9,90 €"
+          "price": "10,90 €"
         },
         {
           "code": "S6",
           "name": "Poulet au sel et au poivre",
-          "price": "9,90 €",
+          "price": "10,90 €",
           "heat": 1
         },
         {
           "code": "S7",
           "name": "Grosses crevettes sautées au sel et au poivre",
-          "price": "12,90 €",
+          "price": "13,90 €",
           "heat": 1
         },
         {
           "code": "S8",
           "name": "Crevettes sautées à l'ail",
-          "price": "11,90 €"
+          "price": "12,90 €"
         },
         {
           "code": "S9",
@@ -810,26 +810,26 @@
         {
           "code": "S10",
           "name": "Cuisses de grenouille sautées au sel et poivre",
-          "price": "12,90 €",
+          "price": "13,90 €",
           "heat": 1
         },
         {
           "code": "S11",
           "name": "Calamar sauté au sel et au poivre",
-          "price": "11,90 €",
+          "price": "12,90 €",
           "heat": 1
         },
         {
           "code": "S12",
           "name": "Poulet croustillant du chef",
-          "price": "10,90 €",
+          "price": "11,90 €",
           "heat": 2
         },
         {
           "code": "S14",
           "name": "Marmite de fruits de mer à la thaïlandaise",
           "desc": "légumes & vermicelles",
-          "price": "14,90 €",
+          "price": "15,90 €",
           "heat": 2
         },
         {
@@ -886,23 +886,23 @@
         {
           "code": "A6",
           "name": "Crevettes sautées nature ou au saté",
-          "price": "12,90 €"
+          "price": "11,90 €"
         },
         {
           "code": "A7",
           "name": "Coquilles St-Jacques sautées nature",
-          "price": "15,90 €"
+          "price": "18,90 €"
         },
         {
           "code": "A8",
           "name": "Coquilles St-Jacques sautées à la thaïlandaise",
-          "price": "15,90 €",
+          "price": "18,90 €",
           "heat": 2
         },
         {
           "code": "A9",
           "name": "Coquilles St-Jacques sautées à la sauce piquante",
-          "price": "15,90 €",
+          "price": "18,90 €",
           "heat": 2
         }
       ]
@@ -915,25 +915,25 @@
         {
           "code": "T1",
           "name": "Poulet sauté à la thaïlandaise",
-          "price": "8,90 €",
+          "price": "9,90 €",
           "heat": 2
         },
         {
           "code": "T2",
           "name": "Bœuf sauté à la thaïlandaise",
-          "price": "9,90 €",
+          "price": "10,90 €",
           "heat": 2
         },
         {
           "code": "T3",
           "name": "Poisson sauté à la thaïlandaise",
-          "price": "10,90 €",
+          "price": "11,90 €",
           "heat": 2
         },
         {
           "code": "T4",
           "name": "Calamar sauté à la thaïlandaise",
-          "price": "10,90 €",
+          "price": "11,90 €",
           "heat": 2
         },
         {
@@ -945,7 +945,7 @@
         {
           "code": "T7",
           "name": "Crevettes sautées à la thaïlandaise",
-          "price": "11,90 €",
+          "price": "12,90 €",
           "heat": 2
         },
         {
@@ -1027,7 +1027,7 @@
         {
           "code": "48",
           "name": "Riz cantonnais",
-          "price": "4,90 €"
+          "price": "5,90 €"
         },
         {
           "code": "49",
@@ -1037,13 +1037,13 @@
         {
           "code": "50",
           "name": "Riz sauté aux crevettes",
-          "price": "7,50 €"
+          "price": "8,90 €"
         },
         {
           "code": "51",
           "name": "Riz sauté à la thaïlandaise",
           "desc": "ananas, crevette, basilic",
-          "price": "7,90 €",
+          "price": "9,90 €",
           "heat": 1
         },
         {
@@ -1219,7 +1219,7 @@
         },
         {
           "code": "",
-          "name": "Dôme blanche",
+          "name": "Dame blanche",
           "price": "6,00 €"
         },
         {
@@ -1256,62 +1256,62 @@
         {
           "code": "",
           "name": "Cocktail maison (12cl)",
-          "price": "4,00 €"
+          "price": "4,50 €"
         },
         {
           "code": "",
           "name": "Cocktail maison sans alcool (12cl)",
-          "price": "4,00 €"
+          "price": "4,50 €"
         },
         {
           "code": "",
           "name": "Ricard (4cl)",
-          "price": "4,00 €"
+          "price": "4,50 €"
         },
         {
           "code": "",
           "name": "Martini rouge ou blanc (8cl)",
-          "price": "4,00 €"
+          "price": "4,50 €"
         },
         {
           "code": "",
           "name": "Martini gin (8cl)",
-          "price": "4,50 €"
+          "price": "5,00 €"
         },
         {
           "code": "",
           "name": "Porto (8cl)",
-          "price": "4,50 €"
+          "price": "5,00 €"
         },
         {
           "code": "",
           "name": "Americano (8cl)",
-          "price": "4,00 €"
+          "price": "4,50 €"
         },
         {
           "code": "",
           "name": "Whisky (8cl)",
-          "price": "7,00 €"
+          "price": "7,50 €"
         },
         {
           "code": "",
           "name": "Gin tonic (12cl)",
-          "price": "6,90 €"
+          "price": "7,50 €"
         },
         {
           "code": "",
           "name": "Kir (12cl)",
-          "price": "4,00 €"
+          "price": "4,50 €"
         },
         {
           "code": "",
           "name": "Kir royal (12cl)",
-          "price": "7,00 €"
+          "price": "7,50 €"
         },
         {
           "code": "",
           "name": "Champagne (12cl)",
-          "price": "7,00 €"
+          "price": "7,50 €"
         }
       ]
     },
@@ -1321,73 +1321,73 @@
       "items": [
         {
           "code": "",
-          "name": "Bière 33cl — Tsingtao, Heineken, Carlsberg, Singha",
-          "price": "4,00 €"
+          "name": "Bière 33cl — Tsingtao, Heineken, Singha",
+          "price": "4,20 € – 4,50 €"
         },
         {
           "code": "",
           "name": "Evian / San-Pellegrino (0,5 L)",
-          "price": "3,50 €"
+          "price": "3,90 €"
         },
         {
           "code": "",
           "name": "Evian / San-Pellegrino (1 L)",
-          "price": "5,50 €"
+          "price": "5,90 €"
         },
         {
           "code": "",
           "name": "Perrier (33cl)",
-          "price": "3,50 €"
+          "price": "3,90 €"
         },
         {
           "code": "",
           "name": "Lipton (33cl)",
-          "price": "2,90 €"
-        },
-        {
-          "code": "",
-          "name": "Schweppes / Limonade (25cl)",
-          "price": "3,50 €"
-        },
-        {
-          "code": "",
-          "name": "Orangina (25cl)",
-          "price": "3,50 €"
-        },
-        {
-          "code": "",
-          "name": "Coca-Cola, light, Zéro (33cl)",
-          "price": "3,50 €"
-        },
-        {
-          "code": "",
-          "name": "Jus de coco (25cl)",
-          "price": "3,50 €"
-        },
-        {
-          "code": "",
-          "name": "Jus de fruits (orange, ananas, abricot)",
-          "price": "3,50 €"
-        },
-        {
-          "code": "",
-          "name": "Lait de soja",
-          "price": "3,50 €"
-        },
-        {
-          "code": "",
-          "name": "Thé vert, oolong, jasmin, menthe",
           "price": "3,00 €"
         },
         {
           "code": "",
+          "name": "Schweppes / Limonade (25cl)",
+          "price": "3,90 €"
+        },
+        {
+          "code": "",
+          "name": "Orangina (25cl)",
+          "price": "3,90 €"
+        },
+        {
+          "code": "",
+          "name": "Coca-Cola, light, Zéro (33cl)",
+          "price": "3,90 €"
+        },
+        {
+          "code": "",
+          "name": "Jus de coco (25cl)",
+          "price": "4,50 €"
+        },
+        {
+          "code": "",
+          "name": "Jus de fruits (orange, ananas, abricot)",
+          "price": "3,90 €"
+        },
+        {
+          "code": "",
+          "name": "Lait de soja",
+          "price": "3,90 €"
+        },
+        {
+          "code": "",
+          "name": "Thé vert, oolong, jasmin, menthe",
+          "price": "3,50 €"
+        },
+        {
+          "code": "",
           "name": "Café ou décaféiné",
-          "price": "2,00 €"
+          "price": "2,20 €"
         },
         {
           "code": "",
           "name": "Café crème",
-          "price": "3,50 €"
+          "price": "3,90 €"
         }
       ]
     },
@@ -1397,13 +1397,13 @@
       "items": [
         {
           "code": "",
-          "name": "1/4 (20cl)",
-          "price": "3,20 €"
+          "name": "1/4 (25cl)",
+          "price": "3,50 €"
         },
         {
           "code": "",
-          "name": "1/2 (37,5cl)",
-          "price": "5,90 €"
+          "name": "1/2 (50cl)",
+          "price": "6,90 €"
         },
         {
           "code": "",
@@ -1420,13 +1420,13 @@
         {
           "code": "",
           "name": "Rosé de Provence",
-          "price": "13,90 €",
+          "price": "14,90 €",
           "price2": "8,90 €"
         },
         {
           "code": "",
           "name": "Rosé Saint-Tropez",
-          "price": "18,90 €",
+          "price": "20,90 €",
           "price2": "10,90 €"
         },
         {
@@ -1438,13 +1438,13 @@
         {
           "code": "",
           "name": "Rosé d'Anjou",
-          "price": "14,90 €",
+          "price": "15,90 €",
           "price2": "8,90 €"
         },
         {
           "code": "",
           "name": "Rosé Tavel",
-          "price": "19,90 €",
+          "price": "22,90 €",
           "price2": "11,90 €"
         },
         {
@@ -1463,7 +1463,7 @@
         {
           "code": "",
           "name": "Côtes du Rhône",
-          "price": "13,90 €",
+          "price": "14,90 €",
           "price2": "8,90 €"
         },
         {
@@ -1487,7 +1487,7 @@
         {
           "code": "",
           "name": "Brouilly",
-          "price": "22,90 €",
+          "price": "23,90 €",
           "price2": "12,90 €"
         },
         {
@@ -1499,7 +1499,7 @@
         {
           "code": "",
           "name": "Saint-Émilion Grand Cru",
-          "price": "36,90 €",
+          "price": "37,90 €",
           "price2": "—"
         },
         {
@@ -1524,7 +1524,7 @@
         {
           "code": "",
           "name": "Muscadet",
-          "price": "15,90 €",
+          "price": "16,90 €",
           "price2": "8,90 €"
         },
         {
@@ -1553,22 +1553,22 @@
         {
           "code": "",
           "name": "Cognac (4cl)",
-          "price": "7,00 €"
+          "price": "7,50 €"
         },
         {
           "code": "",
           "name": "Crème de banane (4cl)",
-          "price": "4,80 €"
+          "price": "4,90 €"
         },
         {
           "code": "",
           "name": "Vodka (4cl)",
-          "price": "4,80 €"
+          "price": "4,90 €"
         },
         {
           "code": "",
           "name": "Gin (4cl)",
-          "price": "4,80 €"
+          "price": "4,90 €"
         }
       ]
     }
