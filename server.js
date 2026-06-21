@@ -22,7 +22,15 @@ const PUBLIC_URL = process.env.PUBLIC_URL || `http://localhost:${PORT}`;
 app.use(express.json());
 
 /* Sert le front (../frontend/index.html, css, js…) */
-app.use(express.static(path.join(__dirname, "..", "frontend")));
+// Sert les pages : fonctionne que le projet soit à plat (tous les fichiers
+// ensemble) ou structuré (dossier frontend/ séparé).
+const fs = require("fs");
+const FRONTEND_DIR = fs.existsSync(path.join(__dirname, "..", "frontend", "index.html"))
+  ? path.join(__dirname, "..", "frontend")
+  : fs.existsSync(path.join(__dirname, "frontend", "index.html"))
+    ? path.join(__dirname, "frontend")
+    : __dirname;
+app.use(express.static(FRONTEND_DIR));
 
 /* ------------------------------------------------------------------ */
 /* Petits utilitaires de validation                                   */
