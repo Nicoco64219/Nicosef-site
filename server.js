@@ -189,14 +189,34 @@ app.post("/api/contact", (req, res) => {
 /* ------------------------------------------------------------------ */
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "nico-secret";
 
-app.get("/api/admin/reservations", (req, res) => {
+/* ------------------------------------------------------------------ */
+/* Protection de la page d'admin par identifiant + mot de passe.       */
+/* Réglez ADMIN_USER et ADMIN_PASSWORD (sur Render) pour activer.       */
+/* Si ADMIN_PASSWORD est vide (par défaut), l'accès reste libre — utile */
+/* en local. En ligne, DÉFINISSEZ ADMIN_PASSWORD pour fermer l'accès.   */
+/* ------------------------------------------------------------------ */
+const ADMIN_USER = process.env.ADMIN_USER || "admin";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+function adminAuth(req, res, next) {
+  if (!ADMIN_PASSWORD) return next(); // pas de mot de passe défini → accès libre
+  const h = req.get("authorization") || "";
+  const [type, creds] = h.split(" ");
+  if (type === "Basic" && creds) {
+    const [u, p] = Buffer.from(creds, "base64").toString().split(":");
+    if (u === ADMIN_USER && p === ADMIN_PASSWORD) return next();
+  }
+  res.set("WWW-Authenticate", 'Basic realm="Admin"');
+  return res.status(401).send("Acces reserve au restaurant.");
+}
+
+app.get("/api/admin/reservations", adminAuth, (req, res) => {
   if (req.get("x-admin-token") !== ADMIN_TOKEN)
     return res.status(401).json({ error: "Accès refusé." });
   res.json(listReservations());
 });
 
 // Accepter / refuser une réservation → met à jour le statut + e-mail au client
-app.post("/api/admin/reservations/status", async (req, res) => {
+app.post("/api/admin/reservations/status", adminAuth, async (req, res) => {
   if (req.get("x-admin-token") !== ADMIN_TOKEN)
     return res.status(401).json({ error: "Accès refusé." });
   const { ref, status } = req.body || {};
@@ -214,7 +234,7 @@ app.post("/api/admin/reservations/status", async (req, res) => {
 });
 
 /* Page d'admin : voir les réservations, accepter / refuser, prévenir le client */
-app.get("/admin", (_req, res) => {
+app.get("/admin", adminAuth, (_req, res) => {
   const rows = listReservations();
   const norm = (s) => s === "accepted" ? "accepted" : s === "refused" ? "refused" : "pending";
   const badge = (s) => s === "accepted" ? '<span class="badge ok">Acceptée</span>'
