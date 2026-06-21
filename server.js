@@ -16,21 +16,13 @@ const { getMenu, createReservation, listReservations, getReservation, updateRese
 const app = express();
 const PORT = process.env.PORT || 3000;
 // Adresse publique du site (pour les liens dans les e-mails). En ligne, réglez
-// PUBLIC_URL sur votre adresse, ex. https://palais-de-joie.onrender.com
+// PUBLIC_URL sur votre adresse, ex. https://https://nicosef-site.onrender.com/
 const PUBLIC_URL = process.env.PUBLIC_URL || `http://localhost:${PORT}`;
 
 app.use(express.json());
 
 /* Sert le front (../frontend/index.html, css, js…) */
-// Sert les pages : fonctionne que le projet soit à plat (tous les fichiers
-// ensemble) ou structuré (dossier frontend/ séparé).
-const fs = require("fs");
-const FRONTEND_DIR = fs.existsSync(path.join(__dirname, "..", "frontend", "index.html"))
-  ? path.join(__dirname, "..", "frontend")
-  : fs.existsSync(path.join(__dirname, "frontend", "index.html"))
-    ? path.join(__dirname, "frontend")
-    : __dirname;
-app.use(express.static(FRONTEND_DIR));
+app.use(express.static(path.join(__dirname, "..", "frontend")));
 
 /* ------------------------------------------------------------------ */
 /* Petits utilitaires de validation                                   */
@@ -48,15 +40,44 @@ const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || "nico64219@gmail.com";
 
 async function notifyByEmail(r, ref) {
   if (!NOTIFY_EMAIL) return;
-  // Évite que Gmail masque un e-mail qu'on s'envoie à soi-même
-  let dest = NOTIFY_EMAIL;
-  if (SENDER_EMAIL && NOTIFY_EMAIL.toLowerCase() === SENDER_EMAIL.toLowerCase())
-    dest = SENDER_EMAIL.replace("@", "+resa@");
-  const subject = `Nouvelle réservation ${ref} — ${r.name} (${r.guests} pers.)`;
-  const text = `Nouvelle demande de réservation :\n\n• Réf : ${ref}\n• Nom : ${r.name}\n• Téléphone : ${r.phone}\n• E-mail : ${r.email}\n• Date : ${r.date}\n• Heure : ${r.time}\n• Couverts : ${r.guests}\n• Note : ${r.notes || "—"}\n\nÀ traiter sur ${PUBLIC_URL}/admin`;
-  const ok = await sendEmail(dest, subject, text, r.email);
-  if (ok) console.log(`  ✉️  alerte réservation envoyée à ${dest}`);
-  else console.warn("  ⚠️  alerte réservation non envoyée (vérifiez BREVO_API_KEY).");
+
+  // 1) Via VOTRE Gmail (fiable, aucune activation) — utilisé si GMAIL_* est configuré
+  if (mailer) {
+    try {
+      await mailer.sendMail({
+        from: `Réservations — Palais de Joie <${GMAIL_USER}>`,
+        to: (GMAIL_USER && NOTIFY_EMAIL.toLowerCase() === GMAIL_USER.toLowerCase())
+              ? GMAIL_USER.replace("@", "+resa@") : NOTIFY_EMAIL,
+        replyTo: r.email,
+        subject: `Nouvelle réservation ${ref} — ${r.name} (${r.guests} pers.)`,
+        text: `Nouvelle demande de réservation :\n\n• Réf : ${ref}\n• Nom : ${r.name}\n• Téléphone : ${r.phone}\n• E-mail : ${r.email}\n• Date : ${r.date}\n• Heure : ${r.time}\n• Couverts : ${r.guests}\n• Note : ${r.notes || "—"}\n\nÀ traiter sur ${PUBLIC_URL}/admin`
+      });
+      console.log(`  ✉️  nouvelle réservation envoyée à ${NOTIFY_EMAIL} (via Gmail)`);
+      return;
+    } catch (e) { console.warn("  ⚠️  e-mail (Gmail) non envoyé :", e.message); }
+  }
+
+  // 2) Sinon FormSubmit (gratuit, mais nécessite le clic unique « Activate Form »)
+  try {
+    const ctrl = new AbortController();
+    const to = setTimeout(() => ctrl.abort(), 8000);
+    const resp = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(NOTIFY_EMAIL)}`, {
+      method: "POST",
+      headers: { "Accept": "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify({
+        Référence: ref, Nom: r.name, Téléphone: r.phone, "E-mail client": r.email,
+        Date: r.date, Heure: r.time, Couverts: r.guests, Note: r.notes || "—",
+        _subject: `Réservation ${ref} — ${r.name} (${r.guests} pers.)`,
+        _template: "table", _captcha: "false"
+      }),
+      signal: ctrl.signal
+    });
+    clearTimeout(to);
+    if (resp.ok) console.log(`  ✉️  e-mail de réservation envoyé à ${NOTIFY_EMAIL} (FormSubmit)`);
+    else console.warn(`  ⚠️  FormSubmit a répondu ${resp.status} (pensez à activer le formulaire)`);
+  } catch (e) {
+    console.warn("  ⚠️  e-mail non envoyé :", e.message);
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -76,50 +97,6 @@ try {
   }
 } catch (e) { mailer = null; }
 
-/* ------------------------------------------------------------------ */
-/* Envoi d'e-mails. Priorité à Brevo (HTTPS) car le SMTP est souvent   */
-/* bloqué sur les hébergeurs gratuits (Render…). Repli : Gmail SMTP.    */
-/* Réglez BREVO_API_KEY sur Render (et l'expéditeur via SENDER_EMAIL).  */
-/* ------------------------------------------------------------------ */
-const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
-const SENDER_EMAIL = process.env.SENDER_EMAIL || GMAIL_USER || NOTIFY_EMAIL || "";
-const SENDER_NAME = process.env.SENDER_NAME || "Au Palais de Joie";
-if (BREVO_API_KEY) console.log("  ✉️  Envoi d'e-mails via Brevo (HTTPS) activé.");
-
-async function sendEmail(to, subject, text, replyTo) {
-  if (!to) return false;
-  // 1) Brevo (HTTPS) — recommandé, passe partout
-  if (BREVO_API_KEY) {
-    try {
-      const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), 10000);
-      const resp = await fetch("https://api.brevo.com/v3/smtp/email", {
-        method: "POST",
-        headers: { "api-key": BREVO_API_KEY, "Content-Type": "application/json", "accept": "application/json" },
-        body: JSON.stringify({
-          sender: { name: SENDER_NAME, email: SENDER_EMAIL },
-          to: [{ email: to }],
-          replyTo: replyTo ? { email: replyTo } : undefined,
-          subject, textContent: text
-        }),
-        signal: ctrl.signal
-      });
-      clearTimeout(t);
-      if (resp.ok) return true;
-      const body = await resp.text().catch(() => "");
-      console.warn("  ⚠️  Brevo a répondu", resp.status, body.slice(0, 200));
-    } catch (e) { console.warn("  ⚠️  Brevo KO :", e.message); }
-  }
-  // 2) Gmail SMTP — repli (peut être bloqué sur les offres gratuites)
-  if (mailer) {
-    try {
-      await mailer.sendMail({ from: `${SENDER_NAME} <${SENDER_EMAIL}>`, to, replyTo, subject, text });
-      return true;
-    } catch (e) { console.warn("  ⚠️  Gmail KO :", e.message); }
-  }
-  return false;
-}
-
 function clientMail(r, status) {
   if (status === "accepted") return {
     subject: "Votre réservation est confirmée ✓ — Au Palais de Joie",
@@ -132,8 +109,12 @@ function clientMail(r, status) {
 }
 
 async function sendClientMail(r, status) {
+  if (!mailer) return false;
   const m = clientMail(r, status);
-  return await sendEmail(r.email, m.subject, m.text);
+  try {
+    await mailer.sendMail({ from: `Au Palais de Joie <${GMAIL_USER}>`, to: r.email, subject: m.subject, text: m.text });
+    return true;
+  } catch (e) { console.warn("  ⚠️  e-mail client non envoyé :", e.message); return false; }
 }
 
 /* ------------------------------------------------------------------ */
@@ -200,34 +181,14 @@ app.post("/api/contact", (req, res) => {
 /* ------------------------------------------------------------------ */
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "nico-secret";
 
-/* ------------------------------------------------------------------ */
-/* Protection de la page d'admin par identifiant + mot de passe.       */
-/* Réglez ADMIN_USER et ADMIN_PASSWORD (sur Render) pour activer.       */
-/* Si ADMIN_PASSWORD est vide (par défaut), l'accès reste libre — utile */
-/* en local. En ligne, DÉFINISSEZ ADMIN_PASSWORD pour fermer l'accès.   */
-/* ------------------------------------------------------------------ */
-const ADMIN_USER = process.env.ADMIN_USER || "admin";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
-function adminAuth(req, res, next) {
-  if (!ADMIN_PASSWORD) return next(); // pas de mot de passe défini → accès libre
-  const h = req.get("authorization") || "";
-  const [type, creds] = h.split(" ");
-  if (type === "Basic" && creds) {
-    const [u, p] = Buffer.from(creds, "base64").toString().split(":");
-    if (u === ADMIN_USER && p === ADMIN_PASSWORD) return next();
-  }
-  res.set("WWW-Authenticate", 'Basic realm="Admin"');
-  return res.status(401).send("Acces reserve au restaurant.");
-}
-
-app.get("/api/admin/reservations", adminAuth, (req, res) => {
+app.get("/api/admin/reservations", (req, res) => {
   if (req.get("x-admin-token") !== ADMIN_TOKEN)
     return res.status(401).json({ error: "Accès refusé." });
   res.json(listReservations());
 });
 
 // Accepter / refuser une réservation → met à jour le statut + e-mail au client
-app.post("/api/admin/reservations/status", adminAuth, async (req, res) => {
+app.post("/api/admin/reservations/status", async (req, res) => {
   if (req.get("x-admin-token") !== ADMIN_TOKEN)
     return res.status(401).json({ error: "Accès refusé." });
   const { ref, status } = req.body || {};
@@ -245,7 +206,7 @@ app.post("/api/admin/reservations/status", adminAuth, async (req, res) => {
 });
 
 /* Page d'admin : voir les réservations, accepter / refuser, prévenir le client */
-app.get("/admin", adminAuth, (_req, res) => {
+app.get("/admin", (_req, res) => {
   const rows = listReservations();
   const norm = (s) => s === "accepted" ? "accepted" : s === "refused" ? "refused" : "pending";
   const badge = (s) => s === "accepted" ? '<span class="badge ok">Acceptée</span>'

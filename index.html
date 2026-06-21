@@ -293,6 +293,10 @@
     .burger { display: flex; }
     .nav-cta { display: none; }
   }
+  @media (max-width: 760px) {
+    .cat-items { grid-template-columns: 1fr; }
+    .cat-block.cols .cat-items { max-width: none; }
+  }
   @media (max-width: 560px) {
     .row2, .row3 { grid-template-columns: 1fr; }
     .hero-meta { gap: 18px; }

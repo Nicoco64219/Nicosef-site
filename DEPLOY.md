@@ -31,7 +31,7 @@ Il faut deux comptes gratuits : **GitHub** (pour déposer le code) et **Render**
 2. **New +** → **Web Service**.
 3. Choisis ton dépôt `nicosef-site`.
 4. Réglages :
-   - **Name** : `palais-de-joie` → ton adresse sera `palais-de-joie.onrender.com`
+   - **Name** : `palais-de-joie` → ton adresse sera `https://nicosef-site.onrender.com/`
    - **Root Directory** : `backend`
    - **Build Command** : `npm install`
    - **Start Command** : `npm start`
@@ -43,10 +43,10 @@ Il faut deux comptes gratuits : **GitHub** (pour déposer le code) et **Render**
    | `GMAIL_APP_PASSWORD` | ton mot de passe d'application Gmail (16 caractères) |
    | `NOTIFY_EMAIL` | `nico64219@gmail.com` |
    | `ADMIN_TOKEN` | un mot de passe à toi (protège `/admin`) |
-   | `PUBLIC_URL` | `https://palais-de-joie.onrender.com` (ton adresse une fois connue) |
+   | `PUBLIC_URL` | `https://https://nicosef-site.onrender.com/` (ton adresse une fois connue) |
 6. Clique **Create Web Service**. Patiente 2–4 minutes.
-7. C'est en ligne ! Ton site : `https://palais-de-joie.onrender.com` — la gestion des
-   réservations : `https://palais-de-joie.onrender.com/admin`.
+7. C'est en ligne ! Ton site : `https://https://nicosef-site.onrender.com/` — la gestion des
+   réservations : `https://https://nicosef-site.onrender.com//admin`.
 
 ---
 
